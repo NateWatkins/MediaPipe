@@ -1,10 +1,10 @@
 # MediaPipe Sign Language Analysis
 
-Hey! So this is my project for analyzing sign language videos using Google's MediaPipe. I was working on some research and needed to extract body pose and hand landmark data from videos, and honestly MediaPipe made it way easier than I thought it would be.
+This is my project for analyzing sign language videos using Google's MediaPipe.
 
-## What does this thing do?
+## What does this do?
 
-Basically you throw in some MP4 videos and it spits out CSV files with all the joint positions and stuff. It tracks:
+It tracks:
 - Body pose (33 landmarks) -
 - Hand landmarks (21 per hand) - 
 - Face landmarks (468 points) - 
@@ -12,7 +12,7 @@ Basically you throw in some MP4 videos and it spits out CSV files with all the j
 
 ## How to use it
 
-1. Put your videos in the `input_videos/` folder (it'll create this automatically)
+1. Put your videos in the `input_videos/` folder 
 2. Run `python3 knee_valgus_analysis.py`
 3. `output_data/` folder for your CSV files
 
@@ -54,7 +54,7 @@ Just do `pip install opencv-python mediapipe pandas numpy` and you should be goo
 ## Some notes from my testing
 
 - The script uses MediaPipe's heaviest model (model_complexity=2) for better accuracy
-- It saves every 30th frame as a PNG with all the landmarks drawn on it (good for debugging)
+- It saves every 30th frame as a PNG with all the landmarks drawn on it 
 - If it can't detect hands/pose in a frame, it fills with NaN values instead of skipping
 - The z-coordinate is depth relative to the wrist for hands, nose for body/face
 
