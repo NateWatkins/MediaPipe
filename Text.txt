@@ -1,0 +1,17 @@
+We will find the most volitil moment in the video using the joint velocity information and we want to be able to pull the frame which that is found.  
+TO be able to do this we will probably need a seperate
+function or another file.
+
+WE also want to find the momement of greatest change in the velocity of the joints
+
+This is later in combination with other factors
+.
+
+Get everything to run first on rgb frmaes 
+Frist 200 frames cut it down
+
+Try on different model parameters track differences, and report it 
+
+We will have csv outputs 
+
+Have a time series plot and see whethere there is a change in curvy 
