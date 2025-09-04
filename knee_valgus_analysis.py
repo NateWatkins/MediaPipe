@@ -12,23 +12,29 @@ mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 
 # ============================ User-tunable globals ============================
-ANNOTATE_EVERY = 30       # Save an annotated frame every N frames; set None/0 to disable
+ANNOTATE_EVERY = 1    
 RESIZE_MAX_WIDTH = None   # e.g., 960; set None to keep original resolution
 
-# ---- Paths (single source) ----
+# ---- Paths ----
 VIDEO_PATH  = "/Users/sehyr/Desktop/_ELAN_picnaming_data/0064D_OA_Picnaming.mov"
 FRAMES_DIR  = "/Users/sehyr/Desktop/KinectBackup/subject_0064D/subject_0064D/frames/rgb"
 
 IMAGE_EXTS = (".jpg", ".JPG", ".png", ".PNG")
 VIDEO_EXTS = (".mov", ".MOV")
 
-# ---- Testing controls (frames only) ----
-FRAME_LIMIT = 1000        # If set to an int, only the first N frames will be parsed (after stride)
-FRAME_STRIDE = 1          # Parse every k-th frame (1 = all frames, 2 = every other frame, etc.)
+#Frame Folder Controls 
+FRAME_LIMIT = 100      
+FRAME_STRIDE = 1        
+### This is the video controls
+FRAME_LIMIT_VIDEO = 100  
+FRAME_STRIDE_VIDEO = 1    
 
-# ---- Testing controls (video) ----
-FRAME_LIMIT_VIDEO = 2000  # If set, process only the first N *processed* frames (after stride)
-FRAME_STRIDE_VIDEO = 2    # Process every k-th frame from the video stream
+
+detectionConfidence = .5
+trackingConfidence = .5
+
+
+
 
 def get_frame_paths(frames_dir):
     paths = []
@@ -70,23 +76,144 @@ hand_landmark_names = {
 }
 
 def create_folders():
-    for folder in ['input_frames', 'input_videos', 'output_frames', 'output_data']:
+    for folder in ['output_frames', 'output_data']:
         os.makedirs(folder, exist_ok=True)
+from scipy.signal import butter, filtfilt
 
-def save_csv_files(face_data, body_data, hand_data, clip_name):
-    video_data_folder = f"output_data/{clip_name}_data"
-    os.makedirs(video_data_folder, exist_ok=True)
+def _butterworth_lowpass(signal, cutoff_freq_hz=4.0, sampling_rate_hz=30.0, filter_order=2):
 
+    nyquist_freq = 0.5 * sampling_rate_hz # Nyquist frequency is half the sampling rate - the highest frequency that can be accurately represented.
+    normalized_cutoff = cutoff_freq_hz / nyquist_freq # Normalized cutoff frequency is the cutoff frequency divided by the Nyquist frequency.
+    b, a = butter(filter_order, normalized_cutoff, btype="low", analog=False) 
+    return filtfilt(b, a, signal)
+
+
+def _interp_short_nans(series, limit=5):
+    # interpolate short NaN runs; leave long gaps as NaN
+    return series.interpolate(method="linear", limit=limit, limit_direction="both")
+
+def _build_allowlist_cols(df, bases):
+    # expand joint base names -> existing x/y/z columns in df
+    cols = []
+    for base in bases:
+        for axis in ("x","y","z"):
+            c = f"{base}_{axis}"
+            if c in df.columns:
+                cols.append(c)
+    return cols
+
+def save_csv_files(face_data, body_data, hand_data, clip_name, fps=30.0, cutoff_hz=4.0, order=2):
+
+    base_folder = f"output_data/{clip_name}_data"
+    raw_folder  = os.path.join(base_folder, "unfiltered")
+    fil_folder  = os.path.join(base_folder, "filtered")
+    os.makedirs(raw_folder, exist_ok=True)
+    os.makedirs(fil_folder, exist_ok=True)
+
+    # ---- to DataFrames ----
     face_df = pd.DataFrame(face_data)
     body_df = pd.DataFrame(body_data)
     hand_df = pd.DataFrame(hand_data)
 
-    face_df.to_csv(f"{video_data_folder}/{clip_name}_face.csv", index=False, float_format='%.10f')
-    body_df.to_csv(f"{video_data_folder}/{clip_name}_body.csv", index=False, float_format='%.10f')
-    hand_df.to_csv(f"{video_data_folder}/{clip_name}_hand.csv", index=False, float_format='%.10f')
+    # ----  UNFILTERED ----
+    face_df.to_csv(os.path.join(raw_folder, f"{clip_name}_face.csv"), index=False, float_format="%.10f")
+    body_df.to_csv(os.path.join(raw_folder, f"{clip_name}_body.csv"), index=False, float_format="%.10f")
+    hand_df.to_csv(os.path.join(raw_folder, f"{clip_name}_hand.csv"), index=False, float_format="%.10f")
 
-    print(f"Saved CSV files in {video_data_folder}/")
-    return face_df, body_df, hand_df
+    # ---- make FILTERED copies ----
+    face_f = face_df.copy()
+    body_f = body_df.copy()
+    hand_f = hand_df.copy()
+
+    # === What we filter (keep this list small & meaningful) ===
+    # HANDS (both sides, ASL-relevant)
+    hand_keys = [
+        # per your df: left_<joint>_* and right_<joint>_*
+        "left_wrist", "right_wrist",
+        "left_thumb_ip", "right_thumb_ip",
+        "left_thumb_tip", "right_thumb_tip",
+        "left_index_mcp", "right_index_mcp",
+        "left_index_tip", "right_index_tip",
+        "left_middle_tip", "right_middle_tip",
+        "left_ring_tip", "right_ring_tip",
+        "left_pinky_tip", "right_pinky_tip",
+    ]
+
+    # BODY (minimal arm chain anchors)
+    body_keys = [
+        "left_shoulder", "right_shoulder",
+        "left_elbow",    "right_elbow",
+        "left_wrist",    "right_wrist",
+        # If you need head anchors from pose:
+        "nose", "left_ear", "right_ear",
+        "left_eye", "right_eye",
+        "mouth_left", "mouth_right",
+    ]
+
+    # FACE: we are NOT filtering the 468-pt mesh; we rely on the pose anchors above.
+
+    # ---- build column allowlists (x/y/z for each joint base) ----
+    body_allow = _build_allowlist_cols(body_f, body_keys)
+    hand_allow = _build_allowlist_cols(hand_f, hand_keys)
+
+    # detection/confidence fields to skip
+    skip_cols = {
+        "frame",
+        "face_detection_confidence",
+        "pose_detection_confidence",
+        "left_hand_detection_confidence",
+        "right_hand_detection_confidence",
+    }
+
+    # ---- apply Butterworth ONLY to allowlisted columns ----
+    for col in body_allow:
+        if col in skip_cols: 
+            continue
+        try:
+            s = _interp_short_nans(body_f[col].astype(float), limit=5)
+            body_f[col] = _butterworth_lowpass(s.values, cutoff_hz, fs=fps, order=order)
+        except Exception:
+            pass
+
+    for col in hand_allow:
+        if col in skip_cols:
+            continue
+        try:
+            s = _interp_short_nans(hand_f[col].astype(float), limit=5)
+            hand_f[col] = _butterworth_lowpass(s.values, cutoff_hz, fs=fps, order=order)
+        except Exception:
+            pass
+
+    # ---- write FILTERED ----
+    face_f.to_csv(os.path.join(fil_folder, f"{clip_name}_face.csv"), index=False, float_format="%.10f")
+    body_f.to_csv(os.path.join(fil_folder, f"{clip_name}_body.csv"), index=False, float_format="%.10f")
+    hand_f.to_csv(os.path.join(fil_folder, f"{clip_name}_hand.csv"), index=False, float_format="%.10f")
+
+    # tiny metadata file for reproducibility
+    meta = {
+        "fps": fps, "cutoff_hz": cutoff_hz, "order": order,
+        "filtered_body_joints": body_keys,
+        "filtered_hand_joints": hand_keys,
+    }
+
+    print(f"✓ Saved unfiltered in {raw_folder}/")
+    print(f"✓ Saved filtered   in {fil_folder}/")
+
+    return face_df, body_df, hand_df, face_f, body_f, hand_f
+# def save_csv_files(face_data, body_data, hand_data, clip_name):
+#     video_data_folder = f"output_data/{clip_name}_data"
+#     os.makedirs(video_data_folder, exist_ok=True)
+
+#     face_df = pd.DataFrame(face_data)
+#     body_df = pd.DataFrame(body_data)
+#     hand_df = pd.DataFrame(hand_data)
+
+#     face_df.to_csv(f"{video_data_folder}/{clip_name}_face.csv", index=False, float_format='%.10f')
+#     body_df.to_csv(f"{video_data_folder}/{clip_name}_body.csv", index=False, float_format='%.10f')
+#     hand_df.to_csv(f"{video_data_folder}/{clip_name}_hand.csv", index=False, float_format='%.10f')
+
+#     print(f"Saved CSV files in {video_data_folder}/")
+#     return face_df, body_df, hand_df
 
 def extract_face_data(results, frame_num):
     face = {'frame': frame_num, 'face_detection_confidence': 1.0 if results and results.face_landmarks else 0.0}
@@ -118,6 +245,7 @@ def extract_body_data(results, frame_num):
             body[f'{jn}_y'] = np.nan
             body[f'{jn}_z'] = np.nan
             body[f'{jn}_visibility'] = np.nan
+            #body[f'{jn}_pose_detection_confidence'] = 0.0
     return body
 
 def extract_hand_data(results, frame_num):
@@ -183,9 +311,13 @@ def process_frames_folder(frames_dir=FRAMES_DIR):
         static_image_mode=False,
         model_complexity=2,
         smooth_landmarks=True,
-        min_detection_confidence=0.5,
-        min_tracking_confidence=0.5
+        min_detection_confidence=detectionConfidence,
+        min_tracking_confidence=trackingConfidence,
+        refine_face_landmarks=True,
+        enable_segmentation=True,  ##Get the segmentation mask of the person vs background pickle file. docs
+        smooth_segmentation=True,
     )
+
     face_data, body_data, hand_data = [], [], []
     for frame_num, fpath in enumerate(frame_paths):
         img_bgr = cv2.imread(fpath)
@@ -235,9 +367,14 @@ def process_video(video_path=VIDEO_PATH):
         print("Cannot open video."); return None
     total_frames_raw = int(cap.get(cv2.CAP_PROP_FRAME_COUNT)) or -1
     holistic = mp_holistic.Holistic(
+        static_image_mode=False,
         model_complexity=2,
-        min_detection_confidence=0.5,
-        min_tracking_confidence=0.5
+        smooth_landmarks=True,
+        min_detection_confidence=detectionConfidence,
+        min_tracking_confidence=trackingConfidence,
+        refine_face_landmarks=True,
+        enable_segmentation=True,
+        smooth_segmentation=True,
     )
     face_data, body_data, hand_data = [], [], []
     frame_num = 0
@@ -257,6 +394,12 @@ def process_video(video_path=VIDEO_PATH):
         frame_resized = _maybe_resize(frame)
         rgb = cv2.cvtColor(frame_resized, cv2.COLOR_BGR2RGB)
         results = holistic.process(rgb)
+        if results.segmentation_mask is not None: #If the Segmentation mask is available
+            mask_bin = (results.segmentation_mask > 0.5).astype(np.uint8) * 255
+            mask_dir = os.path.join("output_frames", f"{clip_name}_masks")
+            os.makedirs(mask_dir, exist_ok=True)
+            mask_path = os.path.join(mask_dir, f"frame_{frame_num:06d}_mask.png")
+            cv2.imwrite(mask_path, mask_bin)
         face_data.append(extract_face_data(results, frame_num))
         body_data.append(extract_body_data(results, frame_num))
         hand_data.append(extract_hand_data(results, frame_num))
@@ -296,6 +439,28 @@ def process_video(video_path=VIDEO_PATH):
     print(f"✓ Completed video: {clip_name} (processed={processed}, stride={FRAME_STRIDE_VIDEO}, limit={FRAME_LIMIT_VIDEO})")
     return True
 
+def export_segmentation_masks(frames_dir):
+    THRESH = 0.5                      # pixels > THRESH are considered "person"
+    MODEL_SELECTION = 0               # 0=close-up, 1=landscape/wider scenes
+    OUT_ROOT  = os.path.dirname(os.path.abspath(FRAMES_DIR))  # parent, e.g., ".../output_frames"
+    MASK_DIR  = os.path.join(OUT_ROOT, "seg_masks")
+    os.makedirs(MASK_DIR, exist_ok=True)                      
+    frames = sorted(glob.glob(os.path.join(FRAMES_DIR, "frame_*.png")))
+    # 4) Run segmentation once per frame and write a binary mask
+    with mp.solutions.selfie_segmentation.SelfieSegmentation(model_selection=MODEL_SELECTION) as segmenter:
+        for i, fp in enumerate(frames, 1):
+            bgr = cv2.imread(fp)                                  # read frame (BGR)
+            rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)            # MediaPipe expects RGB
+            res = segmenter.process(rgb)                          # run model -> float mask [0..1]
+            mask_bin = (res.segmentation_mask > THRESH).astype(np.uint8) * 255  # to 0/255 uint8
+
+            base = os.path.splitext(os.path.basename(fp))[0]      # e.g., "frame_0001"
+            cv2.imwrite(os.path.join(MASK_DIR, f"{base}_mask.png"), mask_bin)
+            print("Hello")
+            if i % 50 == 0 or i == 1 or i == len(frames):
+                print(f"[{i}/{len(frames)}] saved {base}_mask.png")
+
+
 def main():
     print("MediaPipe Holistic Extraction")
     print("=============================")
@@ -304,6 +469,8 @@ def main():
         return
     process_frames_folder(FRAMES_DIR)
     process_video(VIDEO_PATH)
+    export_segmentation_masks(FRAMES_DIR)
+
 
 if __name__ == "__main__":
     main()
