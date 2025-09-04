@@ -80,9 +80,9 @@ def create_folders():
         os.makedirs(folder, exist_ok=True)
 from scipy.signal import butter, filtfilt
 
-def _butterworth_lowpass(signal, cutoff_freq_hz=4.0, sampling_rate_hz=30.0, filter_order=2):
+def _butterworth_lowpass(signal, cutoff_freq_hz=4.0, FrameRate=30, filter_order=2):
 
-    nyquist_freq = 0.5 * sampling_rate_hz # Nyquist frequency is half the sampling rate - the highest frequency that can be accurately represented.
+    nyquist_freq = 0.5 * FrameRate # Nyquist frequency is half the sampling rate - the highest frequency that can be accurately represented.
     normalized_cutoff = cutoff_freq_hz / nyquist_freq # Normalized cutoff frequency is the cutoff frequency divided by the Nyquist frequency.
     b, a = butter(filter_order, normalized_cutoff, btype="low", analog=False) 
     return filtfilt(b, a, signal)
