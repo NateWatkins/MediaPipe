@@ -15,3 +15,11 @@ Try on different model parameters track differences, and report it
 We will have csv outputs 
 
 Have a time series plot and see whethere there is a change in curvy 
+
+
+
+WHere are we now
+WE have the segmentation Mask outputed into the right folder.
+We have graphs and charts based on position and velocity
+WE will get the shadows for the filtered and unfiltered data
+Already a preliminary README but I will add a new one for the progress we have made so frame

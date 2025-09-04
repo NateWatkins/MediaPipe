@@ -80,7 +80,7 @@ def create_folders():
         os.makedirs(folder, exist_ok=True)
 from scipy.signal import butter, filtfilt
 
-def _butterworth_lowpass(signal, cutoff_freq_hz=4.0, FrameRate=30, filter_order=2):
+def _butterworth_lowpass(signal, cutoff_freq_hz=4.0, FrameRate=15, filter_order=2):
 
     nyquist_freq = 0.5 * FrameRate # Nyquist frequency is half the sampling rate - the highest frequency that can be accurately represented.
     normalized_cutoff = cutoff_freq_hz / nyquist_freq # Normalized cutoff frequency is the cutoff frequency divided by the Nyquist frequency.
@@ -102,7 +102,7 @@ def _build_allowlist_cols(df, bases):
                 cols.append(c)
     return cols
 
-def save_csv_files(face_data, body_data, hand_data, clip_name, fps=30.0, cutoff_hz=4.0, order=2):
+def save_csv_files(face_data, body_data, hand_data, clip_name, fps=15, cutoff_hz=4.0, order=2):
 
     base_folder = f"output_data/{clip_name}_data"
     raw_folder  = os.path.join(base_folder, "unfiltered")
@@ -144,7 +144,6 @@ def save_csv_files(face_data, body_data, hand_data, clip_name, fps=30.0, cutoff_
         "left_shoulder", "right_shoulder",
         "left_elbow",    "right_elbow",
         "left_wrist",    "right_wrist",
-        # If you need head anchors from pose:
         "nose", "left_ear", "right_ear",
         "left_eye", "right_eye",
         "mouth_left", "mouth_right",
@@ -174,7 +173,7 @@ def save_csv_files(face_data, body_data, hand_data, clip_name, fps=30.0, cutoff_
             body_f[col] = _butterworth_lowpass(s.values, cutoff_hz, fs=fps, order=order)
         except Exception:
             pass
-
+ 
     for col in hand_allow:
         if col in skip_cols:
             continue
@@ -439,27 +438,6 @@ def process_video(video_path=VIDEO_PATH):
     print(f"✓ Completed video: {clip_name} (processed={processed}, stride={FRAME_STRIDE_VIDEO}, limit={FRAME_LIMIT_VIDEO})")
     return True
 
-def export_segmentation_masks(frames_dir):
-    THRESH = 0.5                      # pixels > THRESH are considered "person"
-    MODEL_SELECTION = 0               # 0=close-up, 1=landscape/wider scenes
-    OUT_ROOT  = os.path.dirname(os.path.abspath(FRAMES_DIR))  # parent, e.g., ".../output_frames"
-    MASK_DIR  = os.path.join(OUT_ROOT, "seg_masks")
-    os.makedirs(MASK_DIR, exist_ok=True)                      
-    frames = sorted(glob.glob(os.path.join(FRAMES_DIR, "frame_*.png")))
-    # 4) Run segmentation once per frame and write a binary mask
-    with mp.solutions.selfie_segmentation.SelfieSegmentation(model_selection=MODEL_SELECTION) as segmenter:
-        for i, fp in enumerate(frames, 1):
-            bgr = cv2.imread(fp)                                  # read frame (BGR)
-            rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)            # MediaPipe expects RGB
-            res = segmenter.process(rgb)                          # run model -> float mask [0..1]
-            mask_bin = (res.segmentation_mask > THRESH).astype(np.uint8) * 255  # to 0/255 uint8
-
-            base = os.path.splitext(os.path.basename(fp))[0]      # e.g., "frame_0001"
-            cv2.imwrite(os.path.join(MASK_DIR, f"{base}_mask.png"), mask_bin)
-            print("Hello")
-            if i % 50 == 0 or i == 1 or i == len(frames):
-                print(f"[{i}/{len(frames)}] saved {base}_mask.png")
-
 
 def main():
     print("MediaPipe Holistic Extraction")
@@ -469,7 +447,7 @@ def main():
         return
     process_frames_folder(FRAMES_DIR)
     process_video(VIDEO_PATH)
-    export_segmentation_masks(FRAMES_DIR)
+    
 
 
 if __name__ == "__main__":

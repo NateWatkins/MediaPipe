@@ -13,13 +13,15 @@ POS_JOINTS = ["left_wrist", "right_wrist"]  # for the Position figure
 VEL_JOINTS = ["left_index_tip"]  # for the Velocity figure
 
 # One color family only (filtered vs unfiltered)
-FILTERED_COLOR   = "#0072B2"  # deep blue (Okabe–Ito)
-UNFILTERED_COLOR = "#A6CEE3"  # lighter companion blue
+FILTERED_COLOR   = "Red"  # deep blue 
+UNFILTERED_COLOR = "Grey"  # lighter companion blue
 
+
+#Graph Parameters 
 LINEWIDTH_FILTERED   = 1.8
-LINEWIDTH_UNFILTERED = 2.2
+LINEWIDTH_UNFILTERED = 1.5
 ALPHA_FILTERED   = 1.0
-ALPHA_UNFILTERED = 0.55
+ALPHA_UNFILTERED = 1.0
 
 # ------------------ PATHS -------------------
 raw_body  = os.path.join(DATA_ROOT, f"{CLIP}_data", "unfiltered", f"{CLIP}_body.csv")
@@ -97,17 +99,21 @@ for j in POS_JOINTS:
     pos_filt_list.append(filt_mag)
     labels.append(j)
 
-ypos = _p98_ylim(*pos_filt_list)
+# Determine y-limits based on 98th percentile of all data to avoid outliers
+ypos = _p98_ylim(*(pos_filt_list + pos_raw_list)) 
+
+
 
 plt.figure(figsize=(10, 4.5))
 # unfiltered backdrop (same light color)
 for y in pos_raw_list:
     plt.plot(time, y, color=UNFILTERED_COLOR, linewidth=LINEWIDTH_UNFILTERED, alpha=ALPHA_UNFILTERED, zorder=1)
+    
 # filtered foreground (single strong color)
 for y, j in zip(pos_filt_list, labels):
     plt.plot(time, y, color=FILTERED_COLOR, linewidth=LINEWIDTH_FILTERED, alpha=ALPHA_FILTERED,
              label=f"{j} (filtered)", zorder=3)
-
+    
 if ypos: plt.ylim(*ypos)
 plt.title("Position magnitude vs Time — Selected joints")
 plt.xlabel("Time (s)")
@@ -125,6 +131,10 @@ vel_raw_list  = []
 vel_filt_list = []
 labels = []
 
+def _valid(a): 
+    return 0 if a is None else int(np.isfinite(a).sum())
+print("[pos] valid pts — raw:", [_valid(a) for a in pos_raw_list],
+      "filtered:", [_valid(a) for a in pos_filt_list])
 for j in VEL_JOINTS:
     raw_vel  = vel_mag_any(j, bd_raw,  hd_raw,  FPS)
     filt_vel = vel_mag_any(j, bd_filt, hd_filt, FPS)
@@ -135,7 +145,9 @@ for j in VEL_JOINTS:
     vel_filt_list.append(filt_vel)
     labels.append(j)
 
-yvel = _p98_ylim(*vel_filt_list)
+
+# Determine y-limits based on 98th percentile of all data to avoid outliers
+yvel = _p98_ylim(*(vel_filt_list + vel_raw_list))
 
 plt.figure(figsize=(10, 4.8))
 for y in vel_raw_list:
@@ -153,3 +165,9 @@ plt.tight_layout()
 plt.savefig(os.path.join("plots", f"velocity_selected_{CLIP}.png"), dpi=220)
 plt.savefig(os.path.join("plots", f"velocity_selected_{CLIP}.svg"))
 plt.show()
+
+
+#Subplot()
+
+
+
