@@ -80,11 +80,11 @@ def create_folders():
         os.makedirs(folder, exist_ok=True)
 from scipy.signal import butter, filtfilt
 
-def _butterworth_lowpass(signal, cutoff_freq_hz=4.0, FrameRate=15, filter_order=2):
-
-    nyquist_freq = 0.5 * FrameRate # Nyquist frequency is half the sampling rate - the highest frequency that can be accurately represented.
-    normalized_cutoff = cutoff_freq_hz / nyquist_freq # Normalized cutoff frequency is the cutoff frequency divided by the Nyquist frequency.
-    b, a = butter(filter_order, normalized_cutoff, btype="low", analog=False) 
+def _butterworth_lowpass(signal, cutoff_hz=4.0, fs=15.0, order=4):
+    nyquist = 0.5 * fs
+    wn = cutoff_hz / nyquist
+    wn = min(max(wn, 1e-6), 0.999999)  # clamp to (0,1)
+    b, a = butter(order, wn, btype="low", analog=False)
     return filtfilt(b, a, signal)
 
 
@@ -168,20 +168,17 @@ def save_csv_files(face_data, body_data, hand_data, clip_name, fps=15, cutoff_hz
     for col in body_allow:
         if col in skip_cols: 
             continue
-        try:
-            s = _interp_short_nans(body_f[col].astype(float), limit=5)
-            body_f[col] = _butterworth_lowpass(s.values, cutoff_hz, fs=fps, order=order)
-        except Exception:
-            pass
+        s = _interp_short_nans(body_f[col].astype(float), limit=5)
+        body_f[col] = _butterworth_lowpass(s.values, cutoff_hz, fs=fps, order=order)
+
  
     for col in hand_allow:
         if col in skip_cols:
             continue
-        try:
-            s = _interp_short_nans(hand_f[col].astype(float), limit=5)
-            hand_f[col] = _butterworth_lowpass(s.values, cutoff_hz, fs=fps, order=order)
-        except Exception:
-            pass
+
+        s = _interp_short_nans(hand_f[col].astype(float), limit=5)
+        hand_f[col] = _butterworth_lowpass(s.values, cutoff_hz, fs=fps, order=order)
+
 
     # ---- write FILTERED ----
     face_f.to_csv(os.path.join(fil_folder, f"{clip_name}_face.csv"), index=False, float_format="%.10f")

@@ -1,25 +1,26 @@
-We will find the most volitil moment in the video using the joint velocity information and we want to be able to pull the frame which that is found.  
-TO be able to do this we will probably need a seperate
-function or another file.
-
-WE also want to find the momement of greatest change in the velocity of the joints
-
-This is later in combination with other factors
-.
-
-Get everything to run first on rgb frmaes 
-Frist 200 frames cut it down
-
-Try on different model parameters track differences, and report it 
-
-We will have csv outputs 
-
-Have a time series plot and see whethere there is a change in curvy 
+We want to find the most volatile moment in the video using joint velocity information and then be able to pull the frame where that happens. 
+We will probably need a separate function or maybe another file.
 
 
 
-WHere are we now
-WE have the segmentation Mask outputed into the right folder.
-We have graphs and charts based on position and velocity
-WE will get the shadows for the filtered and unfiltered data
-Already a preliminary README but I will add a new one for the progress we have made so frame
+
+We also want to capture the moment of greatest change in velocity for the joints. This will later be combined with other factors for a fuller analysis.
+First step is just to get everything running on RGB frames, cut it down to the first 200 frames to test. Then try out different model parameters, track the differences, and report what changes.
+
+
+
+Outputs will include CSV files, and we’ll make time series plots to see whether the curves show meaningful changes.
+
+Where we are right now:
+Segmentation masks are being saved into the right folder.
+Graphs and charts are working for both position and velocity.
+Filtered and unfiltered data can be compared with shadows.
+CSV outputs are working.
+Already have a preliminary README, but this is a new set of notes to capture the current progress.
+
+
+Created the new readME.md 
+- Incldues a quick start quide
+- Shows main functions in depth
+
+Added the unfiltered data lines to both graphs

@@ -114,6 +114,11 @@ for y, j in zip(pos_filt_list, labels):
     plt.plot(time, y, color=FILTERED_COLOR, linewidth=LINEWIDTH_FILTERED, alpha=ALPHA_FILTERED,
              label=f"{j} (filtered)", zorder=3)
     
+for y, j in zip(pos_raw_list, labels):
+    plt.plot(time, y, color=UNFILTERED_COLOR, linewidth=LINEWIDTH_UNFILTERED,
+             alpha=ALPHA_UNFILTERED, label=f"{j} (unfiltered)", zorder=1)
+
+
 if ypos: plt.ylim(*ypos)
 plt.title("Position magnitude vs Time — Selected joints")
 plt.xlabel("Time (s)")
@@ -171,3 +176,15 @@ plt.show()
 
 
 
+for j in POS_JOINTS:
+    for src in ("body","hand"):
+        raw_df  = bd_raw if src=="body" else hd_raw
+        filt_df = bd_filt if src=="body" else hd_filt
+        has = all(c in raw_df for c in (f"{j}_x",f"{j}_y")) and all(c in filt_df for c in (f"{j}_x",f"{j}_y"))
+        if not has: 
+            print(j, src, "missing cols"); 
+            continue
+        rx, ry = raw_df[f"{j}_x"].to_numpy(), raw_df[f"{j}_y"].to_numpy()
+        fx, fy = filt_df[f"{j}_x"].to_numpy(), filt_df[f"{j}_y"].to_numpy()
+        same = np.allclose(rx, fx, equal_nan=True) and np.allclose(ry, fy, equal_nan=True)
+        print(f"{j:>14} [{src}]: identical_xy={same}")
