@@ -24,3 +24,31 @@ Created the new readME.md
 - Shows main functions in depth
 
 Added the unfiltered data lines to both graphs
+
+
+
+
+Explain terms that need explanation. This document should give them a leg up on understand the material
+give documentation. HSould be intructional for the person who follows. What you have learned.
+
+What parameters were used for everything 
+
+...used these parameters and where you can change them too
+
+
+Dependencies before quick start....Cna be installed -> 
+
+Comprehensive 
+
+what is the output. what folder structure does this expect 
+
+
+one graph index finger velocity and position. One video maybe
+
+
+
+first 9 seconds 
+
+
+
+next steps is finding what informaiton hsould be outputed for each participant and createa. oflder system. Goal for the end of the month is to have all the output

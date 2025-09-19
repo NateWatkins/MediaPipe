@@ -23,10 +23,10 @@ IMAGE_EXTS = (".jpg", ".JPG", ".png", ".PNG")
 VIDEO_EXTS = (".mov", ".MOV")
 
 #Frame Folder Controls 
-FRAME_LIMIT = 100      
+FRAME_LIMIT = 270      
 FRAME_STRIDE = 1        
 ### This is the video controls
-FRAME_LIMIT_VIDEO = 100  
+FRAME_LIMIT_VIDEO = 270  
 FRAME_STRIDE_VIDEO = 1    
 
 
@@ -80,7 +80,7 @@ def create_folders():
         os.makedirs(folder, exist_ok=True)
 from scipy.signal import butter, filtfilt
 
-def _butterworth_lowpass(signal, cutoff_hz=4.0, fs=15.0, order=4):
+def _butterworth_lowpass(signal, cutoff_hz=2, fs=30.0, order=4):
     nyquist = 0.5 * fs
     wn = cutoff_hz / nyquist
     wn = min(max(wn, 1e-6), 0.999999)  # clamp to (0,1)
@@ -102,7 +102,7 @@ def _build_allowlist_cols(df, bases):
                 cols.append(c)
     return cols
 
-def save_csv_files(face_data, body_data, hand_data, clip_name, fps=15, cutoff_hz=4.0, order=2):
+def save_csv_files(face_data, body_data, hand_data, clip_name, fps=30.0, cutoff_hz=4.0, order=2):
 
     base_folder = f"output_data/{clip_name}_data"
     raw_folder  = os.path.join(base_folder, "unfiltered")

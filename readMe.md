@@ -53,15 +53,3 @@ This is the “full pipeline” version of the frame-based workflow.
 
 
 
-## Current Progress
-- Segmentation masks are being saved in the correct folder.  
-- CSV outputs for body, hand, and face data are generated.  
-- Position and velocity plots are working for selected joints.  
-- Filtered vs. unfiltered data can be compared visually.  
-
-
-
-## Next Steps
-- Detect the most volatile moment in a viedo clip using joint velocity data.  
-- Automatically pull the frame where this moment occurs.  
-- Compare results and log differences using CSVs and plots.

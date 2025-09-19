@@ -4,17 +4,19 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # ------------------ CONFIG ------------------
-CLIP = "rgb"   # folder prefix under output_data/
+CLIP = "0064D_OA_Picnaming"   # folder prefix under output_data/
 DATA_ROOT = "/Users/sehyr/Desktop/MediaPipe/output_data"
-FPS = 7.5      # frames per second for velocity
+FRAME_ROOT = "/Users/sehyr/Desktop/MediaPipe/output_frames"
+FPS = 30      # frames per second for velocity
 
 # Pick any joints you want, just edit these lists:
-POS_JOINTS = ["left_wrist", "right_wrist"]  # for the Position figure
-VEL_JOINTS = ["left_index_tip"]  # for the Velocity figure
+POS_JOINTS = ["right_pinky"]  # for the Position figure
+VEL_JOINTS = ["right_pinky"]  # for the Velocity figure
 
 # One color family only (filtered vs unfiltered)
-FILTERED_COLOR   = "Red"  # deep blue 
+FILTERED_COLOR   = ["Red", "Purple", "Blue"]  # deep blue 
 UNFILTERED_COLOR = "Grey"  # lighter companion blue
+
 
 
 #Graph Parameters 
@@ -103,16 +105,17 @@ for j in POS_JOINTS:
 ypos = _p98_ylim(*(pos_filt_list + pos_raw_list)) 
 
 
-
 plt.figure(figsize=(10, 4.5))
 # unfiltered backdrop (same light color)
 for y in pos_raw_list:
     plt.plot(time, y, color=UNFILTERED_COLOR, linewidth=LINEWIDTH_UNFILTERED, alpha=ALPHA_UNFILTERED, zorder=1)
     
 # filtered foreground (single strong color)
-for y, j in zip(pos_filt_list, labels):
-    plt.plot(time, y, color=FILTERED_COLOR, linewidth=LINEWIDTH_FILTERED, alpha=ALPHA_FILTERED,
-             label=f"{j} (filtered)", zorder=3)
+for i, (y, j) in enumerate(zip(pos_filt_list, labels)):
+    plt.plot(time, y,
+             color=FILTERED_COLOR[i % len(FILTERED_COLOR)],
+             linewidth=LINEWIDTH_FILTERED, alpha=ALPHA_FILTERED,
+             label=f"{j} (filtered)", zorder=1)
     
 for y, j in zip(pos_raw_list, labels):
     plt.plot(time, y, color=UNFILTERED_COLOR, linewidth=LINEWIDTH_UNFILTERED,
@@ -121,21 +124,21 @@ for y, j in zip(pos_raw_list, labels):
 
 if ypos: plt.ylim(*ypos)
 plt.title("Position magnitude vs Time — Selected joints")
-plt.xlabel("Time (s)")
+plt.xlabel("Time (s)")      
 plt.ylabel("Position (norm units)")
 plt.grid(True, alpha=0.2)
 plt.legend(loc="upper right", fontsize=9, frameon=False)
 plt.tight_layout()
 os.makedirs("plots", exist_ok=True)
 plt.savefig(os.path.join("plots", f"position_selected_{CLIP}.png"), dpi=220)
-plt.savefig(os.path.join("plots", f"position_selected_{CLIP}.svg"))
 plt.show()
 
 # ------------------ FIGURE 2: VELOCITY ------------------
 vel_raw_list  = []
 vel_filt_list = []
 labels = []
-
+import cv2
+import glob
 def _valid(a): 
     return 0 if a is None else int(np.isfinite(a).sum())
 print("[pos] valid pts — raw:", [_valid(a) for a in pos_raw_list],
@@ -157,8 +160,10 @@ yvel = _p98_ylim(*(vel_filt_list + vel_raw_list))
 plt.figure(figsize=(10, 4.8))
 for y in vel_raw_list:
     plt.plot(time, y, color=UNFILTERED_COLOR, linewidth=LINEWIDTH_UNFILTERED, alpha=ALPHA_UNFILTERED, zorder=1)
-for y, j in zip(vel_filt_list, labels):
-    plt.plot(time, y, color=FILTERED_COLOR, linewidth=LINEWIDTH_FILTERED, alpha=ALPHA_FILTERED,
+for i, (y, j) in enumerate(zip(vel_filt_list, labels)):
+    plt.plot(time, y,
+             color=FILTERED_COLOR[i % len(FILTERED_COLOR)],
+             linewidth=LINEWIDTH_FILTERED, alpha=ALPHA_FILTERED,
              label=f"{j} (filtered)", zorder=3)
 
 if yvel: plt.ylim(*yvel)
@@ -168,7 +173,6 @@ plt.grid(True, alpha=0.2)
 plt.legend(loc="upper right", fontsize=9, ncol=1, frameon=False)
 plt.tight_layout()
 plt.savefig(os.path.join("plots", f"velocity_selected_{CLIP}.png"), dpi=220)
-plt.savefig(os.path.join("plots", f"velocity_selected_{CLIP}.svg"))
 plt.show()
 
 
@@ -188,3 +192,74 @@ for j in POS_JOINTS:
         fx, fy = filt_df[f"{j}_x"].to_numpy(), filt_df[f"{j}_y"].to_numpy()
         same = np.allclose(rx, fx, equal_nan=True) and np.allclose(ry, fy, equal_nan=True)
         print(f"{j:>14} [{src}]: identical_xy={same}")
+
+
+
+def make_video_from_frames(frame_dir, out_path, fps=15):
+    # Collect all frames (png/jpg) and sort
+    frames = sorted(glob.glob(os.path.join(frame_dir, "*.png")) +
+                    glob.glob(os.path.join(frame_dir, "*.jpg")))
+    if not frames:
+        print(f"[error] No frames found in {frame_dir}")
+        return
+
+    # Read first frame to get size
+    first = cv2.imread(frames[0])
+    h, w, _ = first.shape
+
+    # Define video writer (mp4 with H.264/MP4V)
+    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+    writer = cv2.VideoWriter(out_path, fourcc, fps, (w, h))
+
+    # Write each frame
+    for f in frames:
+        img = cv2.imread(f)
+        if img is None:
+            print(f"[warn] Skipping unreadable frame: {f}")
+            continue
+        writer.write(img)
+
+    writer.release()
+    print(f"[ok] Saved video to {out_path}")
+
+
+# ------------------ USAGE ------------------
+# Hardcoded folder inside output_data
+frame_folder = os.path.join(FRAME_ROOT, "0064D_OA_Picnaming_frames")
+output_video = os.path.join("plots", "0064D_OA_Picnaming.mp4")
+
+make_video_from_frames(frame_folder, output_video, fps=FPS)
+fig, axes = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
+
+# --- Top subplot: Position ---
+for i, (y, j) in enumerate(zip(pos_filt_list, labels)):
+    axes[0].plot(time, y, color=FILTERED_COLOR[i % len(FILTERED_COLOR)],
+                 linewidth=LINEWIDTH_FILTERED, alpha=ALPHA_FILTERED,
+                 label=f"{j} (filtered)")
+for y, j in zip(pos_raw_list, labels):
+    axes[0].plot(time, y, color=UNFILTERED_COLOR,
+                 linewidth=LINEWIDTH_UNFILTERED, alpha=ALPHA_UNFILTERED,
+                 label=f"{j} (unfiltered)")
+axes[0].set_title("Position magnitude vs Time")
+axes[0].set_ylabel("Position (norm units)")
+axes[0].grid(True, alpha=0.2)
+axes[0].legend(loc="upper right", fontsize=8, frameon=False)
+
+# --- Bottom subplot: Velocity ---
+for i, (y, j) in enumerate(zip(vel_filt_list, labels)):
+    axes[1].plot(time, y, color=FILTERED_COLOR[i % len(FILTERED_COLOR)],
+                 linewidth=LINEWIDTH_FILTERED, alpha=ALPHA_FILTERED,
+                 label=f"{j} (filtered)")
+for y, j in zip(vel_raw_list, labels):
+    axes[1].plot(time, y, color=UNFILTERED_COLOR,
+                 linewidth=LINEWIDTH_UNFILTERED, alpha=ALPHA_UNFILTERED,
+                 label=f"{j} (unfiltered)")
+axes[1].set_title("Velocity magnitude vs Time")
+axes[1].set_xlabel("Time (s)")
+axes[1].set_ylabel("Speed (norm units/s)")
+axes[1].grid(True, alpha=0.2)
+axes[1].legend(loc="upper right", fontsize=8, frameon=False)
+
+plt.tight_layout()
+plt.savefig(os.path.join("plots", f"pos_vel_combined_{CLIP}.png"), dpi=220)
+plt.show()
