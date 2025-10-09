@@ -15,18 +15,18 @@ mp_drawing_styles = mp.solutions.drawing_styles
 ANNOTATE_EVERY = 1    
 RESIZE_MAX_WIDTH = None   # e.g., 960; set None to keep original resolution
 
+OUTPUT_ROOT = "output_subjects"
 # ---- Paths ----
-VIDEO_PATH  = "/Users/sehyr/Desktop/_ELAN_picnaming_data/0064D_OA_Picnaming.mov"
-FRAMES_DIR  = "/Users/sehyr/Desktop/KinectBackup/subject_0064D/subject_0064D/frames/rgb"
+
 
 IMAGE_EXTS = (".jpg", ".JPG", ".png", ".PNG")
-VIDEO_EXTS = (".mov", ".MOV")
+VIDEO_EXTS = (".mov", ".MOV",".mp4",".m4v")
 
 #Frame Folder Controls 
-FRAME_LIMIT = 100      
+FRAME_LIMIT = 270      
 FRAME_STRIDE = 1        
 ### This is the video controls
-FRAME_LIMIT_VIDEO = 100  
+FRAME_LIMIT_VIDEO = 270  
 FRAME_STRIDE_VIDEO = 1    
 
 
@@ -43,16 +43,17 @@ def get_frame_paths(frames_dir):
     return natsorted(paths)
 
 def validate_inputs():
-    ok = True
-    if not (VIDEO_PATH and os.path.isfile(VIDEO_PATH) and VIDEO_PATH.endswith(VIDEO_EXTS)):
-        print(f"✗ VIDEO_PATH invalid or not a .mov: {VIDEO_PATH}")
-        ok = False
-    if not (FRAMES_DIR and os.path.isdir(FRAMES_DIR)):
-        print(f"✗ FRAMES_DIR invalid: {FRAMES_DIR}")
-        ok = False
-    if ok:
-        print("✓ Inputs OK")
-    return ok
+    video_ok  = bool(VIDEO_PATH and os.path.isfile(VIDEO_PATH) and VIDEO_PATH.endswith(VIDEO_EXTS))
+    frames_ok = bool(FRAMES_DIR and os.path.isdir(FRAMES_DIR))
+    if not video_ok:
+        print(f"⚠ VIDEO_PATH not usable (skipping): {VIDEO_PATH}")
+    if not frames_ok:
+        print(f"⚠ FRAMES_DIR not usable (skipping): {FRAMES_DIR}")
+    if video_ok or frames_ok:
+        print("✓ At least one valid input found.")
+    else:
+        print("✗ No valid inputs found.")
+    return video_ok, frames_ok
 
 # ============================ Constants ============================
 pose_landmark_names = {
@@ -80,17 +81,17 @@ def create_folders():
         os.makedirs(folder, exist_ok=True)
 from scipy.signal import butter, filtfilt
 
-def _butterworth_lowpass(signal, cutoff_freq_hz=4.0, FrameRate=15, filter_order=2):
-
-    nyquist_freq = 0.5 * FrameRate # Nyquist frequency is half the sampling rate - the highest frequency that can be accurately represented.
-    normalized_cutoff = cutoff_freq_hz / nyquist_freq # Normalized cutoff frequency is the cutoff frequency divided by the Nyquist frequency.
-    b, a = butter(filter_order, normalized_cutoff, btype="low", analog=False) 
+def _butterworth_lowpass(signal, cutoff_hz=4, fs=30.0, order=4):
+    nyquist = 0.5 * fs
+    wn = cutoff_hz / nyquist
+    wn = min(max(wn, 1e-6), 0.999999)  # clamp to (0,1)
+    b, a = butter(order, wn, btype="low", analog=False)
     return filtfilt(b, a, signal)
 
 
 def _interp_short_nans(series, limit=5):
     # interpolate short NaN runs; leave long gaps as NaN
-    return series.interpolate(method="linear", limit=limit, limit_direction="both")
+    return series
 
 def _build_allowlist_cols(df, bases):
     # expand joint base names -> existing x/y/z columns in df
@@ -102,28 +103,30 @@ def _build_allowlist_cols(df, bases):
                 cols.append(c)
     return cols
 
-def save_csv_files(face_data, body_data, hand_data, clip_name, fps=15, cutoff_hz=4.0, order=2):
+def save_csv_files(face_data, body_data, hand_data, clip_name, fps=30.0, cutoff_hz=4.0, order=2, folder_type=None):
 
-    base_folder = f"output_data/{clip_name}_data"
-    raw_folder  = os.path.join(base_folder, "unfiltered")
-    fil_folder  = os.path.join(base_folder, "filtered")
-    os.makedirs(raw_folder, exist_ok=True)
-    os.makedirs(fil_folder, exist_ok=True)
-
+    subject_id = os.path.basename(os.path.dirname(FRAMES_DIR))
+    base_folder = os.path.join(OUTPUT_ROOT, subject_id, (folder_type or "Frames"), clip_name)
+    os.makedirs(base_folder, exist_ok=True)
+    frames_folder = video_folder = base_folder
     # ---- to DataFrames ----
     face_df = pd.DataFrame(face_data)
     body_df = pd.DataFrame(body_data)
     hand_df = pd.DataFrame(hand_data)
 
-    # ----  UNFILTERED ----
-    face_df.to_csv(os.path.join(raw_folder, f"{clip_name}_face.csv"), index=False, float_format="%.10f")
-    body_df.to_csv(os.path.join(raw_folder, f"{clip_name}_body.csv"), index=False, float_format="%.10f")
-    hand_df.to_csv(os.path.join(raw_folder, f"{clip_name}_hand.csv"), index=False, float_format="%.10f")
 
-    # ---- make FILTERED copies ----
-    face_f = face_df.copy()
-    body_f = body_df.copy()
-    hand_f = hand_df.copy()
+    # ----  Frames ----
+    face_df.to_csv(os.path.join(base_folder, f"{clip_name}_face.csv"), index=False, float_format="%.10f")
+    body_df.to_csv(os.path.join(base_folder, f"{clip_name}_body.csv"), index=False, float_format="%.10f")
+    hand_df.to_csv(os.path.join(base_folder, f"{clip_name}_hand.csv"), index=False, float_format="%.10f")
+
+   
+        
+
+    # # ---- make FILTERED copies ----
+    # face_f = face_df.copy()
+    # body_f = body_df.copy()
+    # hand_f = hand_df.copy()
 
     # === What we filter (keep this list small & meaningful) ===
     # HANDS (both sides, ASL-relevant)
@@ -152,8 +155,8 @@ def save_csv_files(face_data, body_data, hand_data, clip_name, fps=15, cutoff_hz
     # FACE: we are NOT filtering the 468-pt mesh; we rely on the pose anchors above.
 
     # ---- build column allowlists (x/y/z for each joint base) ----
-    body_allow = _build_allowlist_cols(body_f, body_keys)
-    hand_allow = _build_allowlist_cols(hand_f, hand_keys)
+    # body_allow = _build_allowlist_cols(body_f, body_keys)
+    # hand_allow = _build_allowlist_cols(hand_f, hand_keys)
 
     # detection/confidence fields to skip
     skip_cols = {
@@ -164,58 +167,45 @@ def save_csv_files(face_data, body_data, hand_data, clip_name, fps=15, cutoff_hz
         "right_hand_detection_confidence",
     }
 
-    # ---- apply Butterworth ONLY to allowlisted columns ----
-    for col in body_allow:
-        if col in skip_cols: 
-            continue
-        try:
-            s = _interp_short_nans(body_f[col].astype(float), limit=5)
-            body_f[col] = _butterworth_lowpass(s.values, cutoff_hz, fs=fps, order=order)
-        except Exception:
-            pass
+    # # ---- apply Butterworth ONLY to allowlisted columns ----
+    # for col in body_allow:
+    #     if col in skip_cols: 
+    #         continue
+    #     s = _interp_short_nans(body_f[col].astype(float), limit=5)
+    #     #body_f[col] = _butterworth_lowpass(s.values, cutoff_hz, fs=fps, order=order)
+
  
-    for col in hand_allow:
-        if col in skip_cols:
-            continue
-        try:
-            s = _interp_short_nans(hand_f[col].astype(float), limit=5)
-            hand_f[col] = _butterworth_lowpass(s.values, cutoff_hz, fs=fps, order=order)
-        except Exception:
-            pass
+    # for col in hand_allow:
+    #     if col in skip_cols:
+    #         continue
 
-    # ---- write FILTERED ----
-    face_f.to_csv(os.path.join(fil_folder, f"{clip_name}_face.csv"), index=False, float_format="%.10f")
-    body_f.to_csv(os.path.join(fil_folder, f"{clip_name}_body.csv"), index=False, float_format="%.10f")
-    hand_f.to_csv(os.path.join(fil_folder, f"{clip_name}_hand.csv"), index=False, float_format="%.10f")
+    #     s = _interp_short_nans(hand_f[col].astype(float), limit=5)
+    #     #hand_f[col] = _butterworth_lowpass(s.values, cutoff_hz, fs=fps, order=order)
 
-    # tiny metadata file for reproducibility
-    meta = {
-        "fps": fps, "cutoff_hz": cutoff_hz, "order": order,
-        "filtered_body_joints": body_keys,
-        "filtered_hand_joints": hand_keys,
-    }
 
-    print(f"✓ Saved unfiltered in {raw_folder}/")
-    print(f"✓ Saved filtered   in {fil_folder}/")
+    # # ---- write FILTERED ----
+    # face_f.to_csv(os.path.join(fil_folder, f"{clip_name}_face.csv"), index=False, float_format="%.10f")
+    # body_f.to_csv(os.path.join(fil_folder, f"{clip_name}_body.csv"), index=False, float_format="%.10f")
+    # hand_f.to_csv(os.path.join(fil_folder, f"{clip_name}_hand.csv"), index=False, float_format="%.10f")
 
-    return face_df, body_df, hand_df, face_f, body_f, hand_f
-# def save_csv_files(face_data, body_data, hand_data, clip_name):
-#     video_data_folder = f"output_data/{clip_name}_data"
-#     os.makedirs(video_data_folder, exist_ok=True)
+    # # tiny metadata file for reproducibility
+    # meta = {
+    #     "fps": fps, "cutoff_hz": cutoff_hz, "order": order,
+    #     "filtered_body_joints": body_keys,
+    #     "filtered_hand_joints": hand_keys,
+    # }
 
-#     face_df = pd.DataFrame(face_data)
-#     body_df = pd.DataFrame(body_data)
-#     hand_df = pd.DataFrame(hand_data)
+    # print(f"✓ Saved filtered   in {fil_folder}/")
 
-#     face_df.to_csv(f"{video_data_folder}/{clip_name}_face.csv", index=False, float_format='%.10f')
-#     body_df.to_csv(f"{video_data_folder}/{clip_name}_body.csv", index=False, float_format='%.10f')
-#     hand_df.to_csv(f"{video_data_folder}/{clip_name}_hand.csv", index=False, float_format='%.10f')
+    if( folder_type == "Frames"):
+        print(f"✓ Saved raw data  in {base_folder}/")
+    elif( folder_type == "Video"):
+        print(f"✓ Saved raw data  in {base_folder}/")
 
-#     print(f"Saved CSV files in {video_data_folder}/")
-#     return face_df, body_df, hand_df
+    return face_df, body_df, hand_df      #, face_f, body_f, hand_f
 
 def extract_face_data(results, frame_num):
-    face = {'frame': frame_num, 'face_detection_confidence': 1.0 if results and results.face_landmarks else 0.0}
+    face = {'frame': frame_num}
     if results and results.face_landmarks:
         for i, lm in enumerate(results.face_landmarks.landmark):
             face[f'face_{i}_x'] = lm.x
@@ -229,7 +219,7 @@ def extract_face_data(results, frame_num):
     return face
 
 def extract_body_data(results, frame_num):
-    body = {'frame': frame_num, 'pose_detection_confidence': 1.0 if results and results.pose_landmarks else 0.0}
+    body = {'frame': frame_num}
     if results and results.pose_landmarks:
         for i, lm in enumerate(results.pose_landmarks.landmark):
             jn = pose_landmark_names[i]
@@ -250,8 +240,6 @@ def extract_body_data(results, frame_num):
 def extract_hand_data(results, frame_num):
     hand = {
         'frame': frame_num,
-        'left_hand_detection_confidence': 1.0 if results and results.left_hand_landmarks else 0.0,
-        'right_hand_detection_confidence': 1.0 if results and results.right_hand_landmarks else 0.0
     }
     if results and results.left_hand_landmarks:
         for i, lm in enumerate(results.left_hand_landmarks.landmark):
@@ -289,7 +277,7 @@ def _maybe_resize(img_bgr):
     new_w, new_h = int(w * scale), int(h * scale)
     return cv2.resize(img_bgr, (new_w, new_h), interpolation=cv2.INTER_AREA)
 
-def process_frames_folder(frames_dir=FRAMES_DIR):
+def process_frames_folder(frames_dir=None):
     if not frames_dir or not os.path.isdir(frames_dir):
         print(f"Invalid frames_dir: {frames_dir}")
         return
@@ -297,15 +285,9 @@ def process_frames_folder(frames_dir=FRAMES_DIR):
     frame_paths = get_frame_paths(frames_dir)
     if not frame_paths:
         print("No images found."); return
-    if isinstance(FRAME_STRIDE, int) and FRAME_STRIDE > 1:
-        frame_paths = frame_paths[::FRAME_STRIDE]
-    if isinstance(FRAME_LIMIT, int) and FRAME_LIMIT >= 0:
-        frame_paths = frame_paths[:FRAME_LIMIT]
     total_frames = len(frame_paths)
-    print(f"Using {total_frames} frames (limit={FRAME_LIMIT}, stride={FRAME_STRIDE})")
+    print(f"Using {total_frames} frames ")
     clip_name = os.path.basename(os.path.normpath(frames_dir))
-    out_annot = f"output_frames/{clip_name}_frames"
-    os.makedirs(out_annot, exist_ok=True)
     holistic = mp_holistic.Holistic(
         static_image_mode=False,
         model_complexity=2,
@@ -333,33 +315,34 @@ def process_frames_folder(frames_dir=FRAMES_DIR):
         face_data.append(extract_face_data(results, frame_num))
         body_data.append(extract_body_data(results, frame_num))
         hand_data.append(extract_hand_data(results, frame_num))
-        if ANNOTATE_EVERY and (frame_num % ANNOTATE_EVERY == 0):
-            annotated = img_bgr_resized.copy()
-            if results.face_landmarks:
-                mp_drawing.draw_landmarks(
-                    annotated, results.face_landmarks,
-                    mp_holistic.FACEMESH_TESSELATION,
-                    landmark_drawing_spec=None,
-                    connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_tesselation_style()
-                )
-            if results.pose_landmarks:
-                mp_drawing.draw_landmarks(
-                    annotated, results.pose_landmarks,
-                    mp_holistic.POSE_CONNECTIONS,
-                    landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style()
-                )
-            if results.left_hand_landmarks:
-                mp_drawing.draw_landmarks(annotated, results.left_hand_landmarks, mp_holistic.HAND_CONNECTIONS)
-            if results.right_hand_landmarks:
-                mp_drawing.draw_landmarks(annotated, results.right_hand_landmarks, mp_holistic.HAND_CONNECTIONS)
-            cv2.imwrite(os.path.join(out_annot, f"frame_{frame_num:06d}.png"), annotated)
+        # if ANNOTATE_EVERY and (frame_num % ANNOTATE_EVERY == 0):
+        #     annotated = img_bgr_resized.copy()
+        #     if results.face_landmarks:
+        #         mp_drawing.draw_landmarks(
+        #             annotated, results.face_landmarks,
+        #             mp_holistic.FACEMESH_TESSELATION,
+        #             landmark_drawing_spec=None,
+        #             connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_tesselation_style()
+        #         )
+        #     if results.pose_landmarks:
+        #         mp_drawing.draw_landmarks(
+        #             annotated, results.pose_landmarks,
+        #             mp_holistic.POSE_CONNECTIONS,
+        #             landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style()
+        #         )
+        #     if results.left_hand_landmarks:
+        #         mp_drawing.draw_landmarks(annotated, results.left_hand_landmarks, mp_holistic.HAND_CONNECTIONS)
+        #     if results.right_hand_landmarks:
+        #         mp_drawing.draw_landmarks(annotated, results.right_hand_landmarks, mp_holistic.HAND_CONNECTIONS)
+        #     #cv2.imwrite(os.path.join(out_annot, f"frame_{frame_num:06d}.png"), annotated)
         if (frame_num + 1) % 100 == 0:
             print(f"Progress: {frame_num + 1}/{total_frames}")
+        
     holistic.close()
-    save_csv_files(face_data, body_data, hand_data, clip_name)
+    save_csv_files(face_data, body_data, hand_data, clip_name, folder_type="Frames")
     print(f"✓ Completed folder: {clip_name}")
 
-def process_video(video_path=VIDEO_PATH):
+def process_video(video_path=None):
     print(f"Processing video: {os.path.basename(video_path)}")
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
@@ -378,9 +361,9 @@ def process_video(video_path=VIDEO_PATH):
     face_data, body_data, hand_data = [], [], []
     frame_num = 0
     processed = 0
-    clip_name = os.path.splitext(os.path.basename(video_path))[0]
+    clip_name = os.path.basename(os.path.normpath(video_path))
     out_annot = f"output_frames/{clip_name}_frames"
-    os.makedirs(out_annot, exist_ok=True)
+    #os.makedirs(out_annot, exist_ok=True)
     print(f"Video testing controls → limit={FRAME_LIMIT_VIDEO}, stride={FRAME_STRIDE_VIDEO}")
     while True:
         ret, frame = cap.read()
@@ -393,61 +376,98 @@ def process_video(video_path=VIDEO_PATH):
         frame_resized = _maybe_resize(frame)
         rgb = cv2.cvtColor(frame_resized, cv2.COLOR_BGR2RGB)
         results = holistic.process(rgb)
-        if results.segmentation_mask is not None: #If the Segmentation mask is available
-            mask_bin = (results.segmentation_mask > 0.5).astype(np.uint8) * 255
-            mask_dir = os.path.join("output_frames", f"{clip_name}_masks")
-            os.makedirs(mask_dir, exist_ok=True)
-            mask_path = os.path.join(mask_dir, f"frame_{frame_num:06d}_mask.png")
-            cv2.imwrite(mask_path, mask_bin)
+        # if results.segmentation_mask is not None: #If the Segmentation mask is available
+        #     mask_bin = (results.segmentation_mask > 0.5).astype(np.uint8) * 255
+        #     mask_dir = os.path.join("output_frames", f"{clip_name}_masks")
+        #     os.makedirs(mask_dir, exist_ok=True)
+        #     mask_path = os.path.join(mask_dir, f"frame_{frame_num:06d}_mask.png")
+            #cv2.imwrite(mask_path, mask_bin)
         face_data.append(extract_face_data(results, frame_num))
         body_data.append(extract_body_data(results, frame_num))
         hand_data.append(extract_hand_data(results, frame_num))
-        if ANNOTATE_EVERY and ((processed) % ANNOTATE_EVERY == 0):
-            annotated = frame_resized.copy()
-            if results.face_landmarks:
-                mp_drawing.draw_landmarks(
-                    annotated, results.face_landmarks,
-                    mp_holistic.FACEMESH_TESSELATION,
-                    landmark_drawing_spec=None,
-                    connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_tesselation_style()
-                )
-            if results.pose_landmarks:
-                mp_drawing.draw_landmarks(
-                    annotated, results.pose_landmarks,
-                    mp_holistic.POSE_CONNECTIONS,
-                    landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style()
-                )
-            if results.left_hand_landmarks:
-                mp_drawing.draw_landmarks(annotated, results.left_hand_landmarks, mp_holistic.HAND_CONNECTIONS)
-            if results.right_hand_landmarks:
-                mp_drawing.draw_landmarks(annotated, results.right_hand_landmarks, mp_holistic.HAND_CONNECTIONS)
-            cv2.imwrite(os.path.join(out_annot, f"frame_{frame_num:06d}.png"), annotated)
+        # if ANNOTATE_EVERY and ((processed) % ANNOTATE_EVERY == 0):
+        #     annotated = frame_resized.copy()
+        #     if results.face_landmarks:
+        #         mp_drawing.draw_landmarks(
+        #             annotated, results.face_landmarks,
+        #             mp_holistic.FACEMESH_TESSELATION,
+        #             landmark_drawing_spec=None,
+        #             connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_tesselation_style()
+        #         )
+        #     if results.pose_landmarks:
+        #         mp_drawing.draw_landmarks(
+        #             annotated, results.pose_landmarks,
+        #             mp_holistic.POSE_CONNECTIONS,
+        #             landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style()
+        #         )
+        #     if results.left_hand_landmarks:
+        #         mp_drawing.draw_landmarks(annotated, results.left_hand_landmarks, mp_holistic.HAND_CONNECTIONS)
+        #     if results.right_hand_landmarks:
+        #         mp_drawing.draw_landmarks(annotated, results.right_hand_landmarks, mp_holistic.HAND_CONNECTIONS)
+            # cv2.imwrite(os.path.join(out_annot, f"frame_{frame_num:06d}.png"), annotated)
         processed += 1
         frame_num += 1
+        
         if processed % 100 == 0:
             if total_frames_raw > 0:
                 print(f"Processed {processed} frames (raw index ~{frame_num}/{total_frames_raw})")
             else:
                 print(f"Processed {processed} frames")
-        if isinstance(FRAME_LIMIT_VIDEO, int) and FRAME_LIMIT_VIDEO >= 0 and processed >= FRAME_LIMIT_VIDEO:
-            print(f"Reached FRAME_LIMIT_VIDEO={FRAME_LIMIT_VIDEO}; stopping early.")
-            break
     cap.release()
     holistic.close()
-    save_csv_files(face_data, body_data, hand_data, clip_name)
-    print(f"✓ Completed video: {clip_name} (processed={processed}, stride={FRAME_STRIDE_VIDEO}, limit={FRAME_LIMIT_VIDEO})")
+    save_csv_files(face_data, body_data, hand_data, clip_name, folder_type="Video")
+    print(f"✓ Completed video: {clip_name} ")
     return True
 
 
+
 def main():
-    print("MediaPipe Holistic Extraction")
-    print("=============================")
-    create_folders()
-    if not validate_inputs():
+    print("MediaPipe Holistic Extraction (Batch)")
+    print("====================================")
+
+    done_file = "done.txt"
+    done = set(open(done_file).read().split()) if os.path.exists(done_file) else set()
+    global OUTPUT_ROOT
+    BASE_OUT = OUTPUT_ROOT  # remember original root
+
+
+    if not os.path.exists("participants.txt"):
+        print("No participants.txt file found.")
         return
-    process_frames_folder(FRAMES_DIR)
-    process_video(VIDEO_PATH)
+
+    with open("participants.txt") as f:
+        lines = [l.strip() for l in f if l.strip()]
+
     
+
+    for line in lines:
+        video_path, frames_dir = line.split("|", 1)
+        tag_frames = f"{line}#frames"
+        tag_video  = f"{line}#video"
+
+        clip_name = os.path.splitext(os.path.basename(video_path))[0]
+        subject_id = os.path.normpath(frames_dir).split(os.sep)[-3]
+        line_root = os.path.join(BASE_OUT, subject_id)
+        os.makedirs(line_root, exist_ok=True)
+        OUTPUT_ROOT = line_root  
+
+        os.makedirs(os.path.join(OUTPUT_ROOT, subject_id), exist_ok=True)
+
+        global VIDEO_PATH, FRAMES_DIR
+        VIDEO_PATH, FRAMES_DIR = video_path, frames_dir
+
+        print(f"\n=== Processing {clip_name} ===")
+        video_ok, frames_ok = validate_inputs()
+
+        if frames_ok and tag_frames not in done:
+            process_frames_folder(frames_dir)
+            with open(done_file, "a") as df: df.write(tag_frames + "\n")
+
+        if video_ok and tag_video not in done:
+            process_video(video_path)
+            with open(done_file, "a") as df: df.write(tag_video + "\n")
+        OUTPUT_ROOT = BASE_OUT
+    print("\nAll participants processed ✓")
 
 
 if __name__ == "__main__":
