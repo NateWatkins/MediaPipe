@@ -15,7 +15,7 @@ mp_drawing_styles = mp.solutions.drawing_styles
 ANNOTATE_EVERY = 1    
 RESIZE_MAX_WIDTH = None   # e.g., 960; set None to keep original resolution
 
-OUTPUT_ROOT = "output_subjects"
+OUTPUT_ROOT = "../output_subjects"
 # ---- Paths ----
 
 
@@ -77,8 +77,7 @@ hand_landmark_names = {
 }
 
 def create_folders():
-    for folder in ['output_frames', 'output_data']:
-        os.makedirs(folder, exist_ok=True)
+    os.makedirs("output_data", exist_ok=True)
 from scipy.signal import butter, filtfilt
 
 def _butterworth_lowpass(signal, cutoff_hz=4, fs=30.0, order=4):
@@ -103,11 +102,11 @@ def _build_allowlist_cols(df, bases):
                 cols.append(c)
     return cols
 
-def save_csv_files(face_data, body_data, hand_data, clip_name, fps=30.0, cutoff_hz=4.0, order=2, folder_type=None):
+def save_csv_files(face_data, body_data, hand_data, fps=30.0, cutoff_hz=4.0, order=2, folder_type=None):
 
-    subject_id = os.path.basename(os.path.dirname(FRAMES_DIR))
-    base_folder = os.path.join(OUTPUT_ROOT, subject_id, (folder_type or "Frames"), clip_name)
-    os.makedirs(base_folder, exist_ok=True)
+    #subject_id = os.path.basename(os.path.dirname(FRAMES_DIR))
+    base_folder = os.path.join(OUTPUT_ROOT, clip_name)
+    os.makedirs( base_folder, exist_ok=True)
     frames_folder = video_folder = base_folder
     # ---- to DataFrames ----
     face_df = pd.DataFrame(face_data)
@@ -116,9 +115,9 @@ def save_csv_files(face_data, body_data, hand_data, clip_name, fps=30.0, cutoff_
 
 
     # ----  Frames ----
-    face_df.to_csv(os.path.join(base_folder, f"{clip_name}_face.csv"), index=False, float_format="%.10f")
-    body_df.to_csv(os.path.join(base_folder, f"{clip_name}_body.csv"), index=False, float_format="%.10f")
-    hand_df.to_csv(os.path.join(base_folder, f"{clip_name}_hand.csv"), index=False, float_format="%.10f")
+    face_df.to_csv(os.path.join(base_folder, f"{subject_id}_{folder_type}_face.csv"), index=False, float_format="%.10f")
+    body_df.to_csv(os.path.join(base_folder, f"{subject_id}_{folder_type}_body.csv"), index=False, float_format="%.10f")
+    hand_df.to_csv(os.path.join(base_folder, f"{subject_id}_{folder_type}_hand.csv"), index=False, float_format="%.10f")
 
    
         
@@ -210,12 +209,12 @@ def extract_face_data(results, frame_num):
         for i, lm in enumerate(results.face_landmarks.landmark):
             face[f'face_{i}_x'] = lm.x
             face[f'face_{i}_y'] = lm.y
-            face[f'face_{i}_z'] = lm.z
+            #face[f'face_{i}_z'] = lm.z
     else:
         for i in range(468):
             face[f'face_{i}_x'] = np.nan
             face[f'face_{i}_y'] = np.nan
-            face[f'face_{i}_z'] = np.nan
+            #face[f'face_{i}_z'] = np.nan
     return face
 
 def extract_body_data(results, frame_num):
@@ -225,14 +224,14 @@ def extract_body_data(results, frame_num):
             jn = pose_landmark_names[i]
             body[f'{jn}_x'] = lm.x
             body[f'{jn}_y'] = lm.y
-            body[f'{jn}_z'] = lm.z
+            #body[f'{jn}_z'] = lm.z
             body[f'{jn}_visibility'] = lm.visibility
     else:
         for i in range(33):
             jn = pose_landmark_names[i]
             body[f'{jn}_x'] = np.nan
             body[f'{jn}_y'] = np.nan
-            body[f'{jn}_z'] = np.nan
+            #body[f'{jn}_z'] = np.nan
             body[f'{jn}_visibility'] = np.nan
             #body[f'{jn}_pose_detection_confidence'] = 0.0
     return body
@@ -246,25 +245,25 @@ def extract_hand_data(results, frame_num):
             jn = hand_landmark_names[i]
             hand[f'left_{jn}_x'] = lm.x
             hand[f'left_{jn}_y'] = lm.y
-            hand[f'left_{jn}_z'] = lm.z
+            #hand[f'left_{jn}_z'] = lm.z
     else:
         for i in range(21):
             jn = hand_landmark_names[i]
             hand[f'left_{jn}_x'] = np.nan
             hand[f'left_{jn}_y'] = np.nan
-            hand[f'left_{jn}_z'] = np.nan
+            #hand[f'left_{jn}_z'] = np.nan
     if results and results.right_hand_landmarks:
         for i, lm in enumerate(results.right_hand_landmarks.landmark):
             jn = hand_landmark_names[i]
             hand[f'right_{jn}_x'] = lm.x
             hand[f'right_{jn}_y'] = lm.y
-            hand[f'right_{jn}_z'] = lm.z
+            #hand[f'right_{jn}_z'] = lm.z
     else:
         for i in range(21):
             jn = hand_landmark_names[i]
             hand[f'right_{jn}_x'] = np.nan
             hand[f'right_{jn}_y'] = np.nan
-            hand[f'right_{jn}_z'] = np.nan
+            #hand[f'right_{jn}_z'] = np.nan
     return hand
 
 def _maybe_resize(img_bgr):
@@ -337,9 +336,13 @@ def process_frames_folder(frames_dir=None):
         #     #cv2.imwrite(os.path.join(out_annot, f"frame_{frame_num:06d}.png"), annotated)
         if (frame_num + 1) % 100 == 0:
             print(f"Progress: {frame_num + 1}/{total_frames}")
+        if frame_num >= 150:
+            print("Frame limit reached.")
+            break
         
     holistic.close()
-    save_csv_files(face_data, body_data, hand_data, clip_name, folder_type="Frames")
+    save_csv_files(face_data, body_data, hand_data, folder_type="RGB")
+
     print(f"✓ Completed folder: {clip_name}")
 
 def process_video(video_path=None):
@@ -359,10 +362,10 @@ def process_video(video_path=None):
         smooth_segmentation=True,
     )
     face_data, body_data, hand_data = [], [], []
-    frame_num = 0
+    frame_num = 0 
     processed = 0
-    clip_name = os.path.basename(os.path.normpath(video_path))
-    out_annot = f"output_frames/{clip_name}_frames"
+    #clip_name = os.path.basename(os.path.normpath(video_path))
+    #out_annot = f"output_frames/{clip_name}_frames"
     #os.makedirs(out_annot, exist_ok=True)
     print(f"Video testing controls → limit={FRAME_LIMIT_VIDEO}, stride={FRAME_STRIDE_VIDEO}")
     while True:
@@ -413,9 +416,13 @@ def process_video(video_path=None):
                 print(f"Processed {processed} frames (raw index ~{frame_num}/{total_frames_raw})")
             else:
                 print(f"Processed {processed} frames")
+        if processed >= 150:
+            print("Frame limit reached.")
+            break
+        
     cap.release()
     holistic.close()
-    save_csv_files(face_data, body_data, hand_data, clip_name, folder_type="Video")
+    save_csv_files(face_data, body_data, hand_data, folder_type="Video")
     print(f"✓ Completed video: {clip_name} ")
     return True
 
@@ -425,45 +432,48 @@ def main():
     print("MediaPipe Holistic Extraction (Batch)")
     print("====================================")
 
-    done_file = "done.txt"
+    done_file = "../config/done.csv"
     done = set(open(done_file).read().split()) if os.path.exists(done_file) else set()
     global OUTPUT_ROOT
     BASE_OUT = OUTPUT_ROOT  # remember original root
 
 
-    if not os.path.exists("participants.txt"):
-        print("No participants.txt file found.")
+    if not os.path.exists("../config/participants.csv"):
+        print("No participants.csv file found.")
         return
 
-    with open("participants.txt") as f:
+    with open("../config/participants.csv") as f:
         lines = [l.strip() for l in f if l.strip()]
 
     
 
     for line in lines:
-        video_path, frames_dir = line.split("|", 1)
+        sub_id, video_path, frames_dir = line.split(",")
         tag_frames = f"{line}#frames"
         tag_video  = f"{line}#video"
+        global clip_name
+        global subject_id
+        subject_id = sub_id
 
-        clip_name = os.path.splitext(os.path.basename(video_path))[0]
-        subject_id = os.path.normpath(frames_dir).split(os.sep)[-3]
-        line_root = os.path.join(BASE_OUT, subject_id)
+        line_root = os.path.join(BASE_OUT, sub_id)
         os.makedirs(line_root, exist_ok=True)
         OUTPUT_ROOT = line_root  
 
-        os.makedirs(os.path.join(OUTPUT_ROOT, subject_id), exist_ok=True)
+        os.makedirs(OUTPUT_ROOT, exist_ok=True)
 
         global VIDEO_PATH, FRAMES_DIR
         VIDEO_PATH, FRAMES_DIR = video_path, frames_dir
 
-        print(f"\n=== Processing {clip_name} ===")
+        print(f"\n=== Processing {sub_id} ===")
         video_ok, frames_ok = validate_inputs()
 
         if frames_ok and tag_frames not in done:
+            clip_name = "Frames"
             process_frames_folder(frames_dir)
             with open(done_file, "a") as df: df.write(tag_frames + "\n")
 
         if video_ok and tag_video not in done:
+            clip_name = "RGB"
             process_video(video_path)
             with open(done_file, "a") as df: df.write(tag_video + "\n")
         OUTPUT_ROOT = BASE_OUT
