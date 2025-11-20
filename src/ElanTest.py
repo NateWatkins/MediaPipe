@@ -10,10 +10,14 @@ txt_path = txt_files[0]
 csv_files = sorted(dir_path.rglob("signdata (8)(in).csv"))  
 csv_path = csv_files[0]  
 
+
 df_elan= pd.read_csv(txt_path, sep="\t")
 ALex_df = pd.read_csv(csv_path)
 # Keep the following columns from ASL-LEX data: EntryID, SignFrequency(Z), Code, Iconicity(Z), LexicalClass, Compound.2.0, Handshape.2.0, SelectedFingers.2.0, ThumbPosition.2.0, SignType.2.0, Movement.2.0, MajorLocation.2.0, MinorLocation.2.0, Contact.2.0, Parameter.Neighborhood.Density.2.0
 ALex_df = ALex_df[["EntryID", "SignFrequency(Z)", "Code", "Iconicity(Z)", "LexicalClass", "Compound.2.0", "Handshape.2.0", "SelectedFingers.2.0", "ThumbPosition.2.0", "SignType.2.0", "Movement.2.0", "MajorLocation.2.0", "MinorLocation.2.0", "Contact.2.0", "Parameter.Neighborhood.Density.2.0"]]
+
+
+
 
 #Trim the whitespace for both dataframs
 #Turn everything in EntryId and ID Gloss ASLLEX to lowercase
@@ -28,6 +32,10 @@ df_elan["ID Gloss ASLLEX OLD"] = df_elan["ID Gloss ASLLEX"]
 
 #Truncate ID Gloss ASLLEX at the first period
 df_elan["ID Gloss ASLLEX"] = df_elan["ID Gloss ASLLEX"].str.split(".").str[0]
+
+
+
+
 
 print(f"Loaded: {txt_path}")
 print(df_elan)

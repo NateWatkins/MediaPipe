@@ -1,0 +1,31 @@
+Takes in the joint full names
+
+Uses _build_allwlist_cols(df,bases)
+ - Return a data frame of x,y,z points of each joint
+
+Rejection issue. 
+We need to find the peaks of the signs either by looking at the time slot of the frames 
+
+Get the space press and the next one and only plot on the that time window
+
+Plot by a flexible x axis for time
+
+When I get both graphs I will need to 
+
+
+viedo not synced and it is not real time 
+
+approximation about where the wirte up area 
+
+near 0 velocities are better for the 
+
+
+large Data set with all the finformation with all the features
+dont segment the features wriet about mediapipe
+
+
+Write up about the context of the paramters and then a lyamans terms
+ how have you used mediapipe to get the outputs that we gotten
+
+
+ Play around with the ELAN data and figure aout exportation and link the informatino with the movement
