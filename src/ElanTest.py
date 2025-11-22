@@ -27,7 +27,11 @@ df_elan["ID Gloss ASLLEX"] = df_elan["ID Gloss ASLLEX"].str.strip().str.lower()
 df_elan["ID Gloss ASLLEX OLD"] = df_elan["ID Gloss ASLLEX"]
 
 #Truncate ID Gloss ASLLEX at the first period
-df_elan["ID Gloss ASLLEX"] = df_elan["ID Gloss ASLLEX"].str.split(".").str[0]
+# df_elan["ID Gloss ASLLEX"] = df_elan["ID Gloss ASLLEX"].str.split(".").str[0]
+
+#Replace 
+
+
 
 print(f"Loaded: {txt_path}")
 print(df_elan)
@@ -49,6 +53,9 @@ num_joins_failed = df_joined['EntryID'].isna().sum()
 print(f"Number of joins that failed: {num_joins_failed}")
 
 #Count how many joins were there and how many joins didn't work if the number of joins didn't work is less than 20 print them
+
+#Baller
+
 
 
 print(df_joined)
