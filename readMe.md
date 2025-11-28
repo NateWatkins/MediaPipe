@@ -74,7 +74,7 @@ The merge script:
 3. Cleans gloss names.
 4. Removes rejected trials.
 5. Joins ELAN trials with ASL-LEX.
-6. Runs a Mann–Whitney U test comparing Noun vs Verb durations.
+6. Runs a Mann–Whitney U test comparing Noun vs Verb durations.f
 7. Saves:
 
        Elan_ASLLEX_Joined.csv

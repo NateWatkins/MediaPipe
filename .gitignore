@@ -1,2 +1,23 @@
-output_subjects/
+data/
 config/
+
+### --- Python Cache ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+### --- MacOS Junk ---
+.DS_Store
+
+### --- IDE / Editor Files ---
+.vscode/
+.idea/
+
+### --- Logs / Temp ---
+*.log
+*.tmp
+
+### --- Generated Outputs ---
+*.csv
+*.xlsx

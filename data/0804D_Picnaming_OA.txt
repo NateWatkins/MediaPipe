@@ -1,0 +1,518 @@
+Begin Time - msec	End Time - msec	Duration - msec	Block	Trial no	Stimulus	Handedness	Comments_CF	Comments_DF	NMM	Compound signs	Comments_ZS	Comments_NC	Response Translation	Response Status	ID Gloss ASLLEX
+10028	394667	384639	O3												
+467999	836189	368190	O4												
+1339999	1734155	394156	A3												
+1830028	2210188	380160	A4												
+10685	12042	1357	O3	9	obj173trash.jpg	1							Don't know	Reject	
+13784	15084	1300	O3	10	obj288orange.jpg	1			NMM				ORANGE-n	Accept++	ORANGE
+20528	21714	1186	O3	11	obj328pliers.jpg	1							Don't know	Reject	
+23060	24274	1214	O3	12	obj102clown.jpg	1			NMM				CLOWN-n	Accept++	CLOWN
+25662	26747	1085	O3	13	bicycle.png	2+			NMM				BICYCLE_n	Accept++	BICYCLE
+28285	29399	1114	O3	14	vacuum.png		1			NMM				VACUUM_n	Accept++	VACUUM
+30910	32024	1114	O3	15	spider.png	2+			NMM				SPIDER_n	Accept++	SPIDER
+33535	34635	1100	O3	16	car.png	2+			NMM				CAR-n	Accept++	CAR
+36080	37337	1257	O3	17	glasses.png	2+			NMM				GLASSES_n	Accept++	GLASSES
+39074	40374	1300	O3	18	obj379scarf.jpg	2-			NMM				SCARF_n	Accept++	SCARF.3
+41734	42863	1129	O3	19	obj336potato.jpg	2-			NMM				POTATO_n	Accept++	POTATO
+44323	45523	1200	O3	20	cow.png	2+			NMM		delete COW.1, keep as COW		COW_n	Accept++	COW
+47048	48148	1100	O3	21	fox.png	1			NMM				FOX_n	Accept++	FOX
+49794	51165	1371	O3	22	obj435sword.jpg	1			NMM				SWORD_n	Accept++	SWORD
+52360	53546	1186	O3	23	obj263mirror.jpg	1			NMM				MIRROR_n	Accept++	MIRROR
+54792	56035	1243	O3	24	obj066butter.jpg	2-			NMM: (mouthing 'soap')				SOAP_n	Reject	SOAP
+57265	58422	1157	O3	25	hat2.png	1			NMM				HAT_n	Accept++	HAT
+60068	61325	1257	O3	26	cake2.png	2-			NMM		no, keep as CAKE - close enough		CAKE_n	Accept++	CAKE
+62864	64078	1214	O3	27	obj142ear.jpg	1			NMM				EAR_n	Accept++	EAR
+65239	66567	1328	O3	28	turtle.png	2-			NMM				TURTLE_n	Accept++	TURTLE
+68382	69539	1157	O3	29	obj207hippo.jpg	2+							HIPPO_n	Accept++	HIPPO.1
+71141	72384	1243	O3	30	spaghetti.png	2+							SPAGHETTI_n	Accept++	SPAGHETTI
+73627	75042	1415	O3	31	obj130dolphin.jpg	2-			NMM				DOLPHIN_n	Accept++	DOLPHIN
+76957	78143	1186	O3	32	obj515woman.jpg	1							WOMAN_n	Accept++	WOMAN
+79646	80903	1257	O3	33	obj059bra.jpg	2+			NMM				BRA_n	Accept++	BRA
+82654	83797	1143	O3	34	firefighter.png	1					changed gloss to FIREMAN		FIREMAN_n	Accept++	FIREMAN
+85506	86878	1372	O3	35	obj520zipper.jpg	2-			NMM				ZIPPER_n	Accept++	ZIPPER
+88458	89715	1257	O3	36	obj342queen.jpg	1			NMM				QUEEN_n	Accept++	QUEEN
+91226	92483	1257	O3	37	obj434swing.jpg	2-			NMM		changed from SWING.1 to SWING_2		SWING_n	Accept++	SWING_2
+93906	95163	1257	O3	38	obj135dress.jpg	2+			NMM				DRESS_n	Accept++	DRESS
+96430	97601	1171	O3	39	obj479umbrella.jpg	2-			NMM				UMBRELLA_n	Accept++	UMBRELLA
+98838	99923	1085	O3	40	obj139duck.jpg	1							DUCK_n	Accept++	DUCK.1
+101304	102447	1143	O3	41	obj189gun.jpg	1			NMM				GUN_n	Accept++	GUN
+103885	105056	1171	O3	42	obj217iron.jpg	2-			NMM				IRON_n	Accept++	IRON
+106480	107680	1200	O3	43	obj154fire.jpg	2+			NMM				FIRE_n	Accept++	FIRE
+109101	110301	1200	O3	44	frog2.png	1			NMM				FROG_n	Accept++	FROG
+111682	112911	1229	O3	45	comb.png	1			NMM				COMB_n	Accept++	COMB
+114090	115261	1171	O3	46	obj132door.jpg	2-			NMM				DOOR_n	Accept++	DOOR
+116627	117670	1043	O3	47	moon.png	1			NMM				MOON_n	Accept++	MOON
+119187	120344	1157	O3	48	obj146envelope.jpg	2+			NMM				ENVELOPE_n	Accept+-	ENVELOPE.3
+123247	124190	943	O3	49	obj109corkscrew.jpg	1							Don't know	Reject	
+125913	127199	1286	O3	50	obj471trophy.jpg	2+							TROPHY_n	Accept++	TROPHY
+128709	130180	1471	O3	51	obj041belt.jpg	2+			NMM		changed from BELT to BELT_3		BELT_n	Accept++	BELT_3
+131782	132782	1000	O3	52	cookie.png	2-			NMM				COOKIE_n	Accept++	COOKIE
+134303	135532	1229	O3	53	obj141eagle.jpg	1			NMM				EAGLE_n		Accept++	EAGLE
+137013	138113	1100	O3	54	dog.png	1			NMM		changed from DOG to DOG_3		DOG_n	Accept++	DOG_3
+142415	143415	1000	O3	55	obj330policeman.jpg	1							Don't know	Reject	
+144781	145938	1157	O3	56	obj238lemon.jpg	1			NMM				LEMON.1_n	Accept++	LEMON.2
+147742	149013	1271	O3	57	obj137drill.jpg	2-			NMM		changed from DRILL.1 to DRILL		DRILL_n	Accept++	DRILL
+151559	152931	1372	O3	58	obj162floor.jpg	2+			NMM				FLOOR_n	Accept++	FLOOR
+154398	155484	1086	O3	59	obj039bug.jpg	1			NMM				BUG_n	Accept++	BUG
+156892	158106	1214	O3	60	obj192hamburger.jpg	2+			NMM				HAMBURGER_n	Accept++	HAMBURGER
+159638	160710	1072	O3	61	boy.png	1			NMM				BOY_n	Accept++	BOY
+162041	163041	1000	O3	62	obj380scissors.jpg	1			NMM				SCISSORS_n	Accept++	SCISSORS
+164982	166253	1271	O3	63	obj323pirate.jpg	1			NMM				PIRATE_n	Accept++	PIRATE
+167669	168769	1100	O3	64	obj409snake.jpg	1			NMM				SNAKE_n	Accept++	SNAKE
+170085	171313	1228	O3	65	tree.png	2-			NMM				TREE_n	Accept++	TREE
+172550	173736	1186	O3	66	obj461toothbrush.jpg	1							toothbrush_n	Accept++	TOOTHBRUSH
+175612	176912	1300	O3	67	obj506whip.jpg	1			NMM				WHIP_n	Accept++	WHIP
+178299	179470	1171	O3	68	camera.png	2+			NMM				CAMERA_n	Accept++	CAMERA
+180723	181766	1043	O3	69	mouse2.png	1			NMM				MOUSE_n	Accept++	MOUSE
+183425	184668	1243	O3	70	obj350razor.jpg	1			NMM				RAZOR_n	Accept++	RAZOR
+186307	187535	1228	O3	71	obj035beard.jpg	2+			NMM				BEARD_n	Accept++	BEARD
+189257	190557	1300	O3	72	obj514wolf.jpg	1			NMM				WOLF_n	Accept++	WOLF
+191917	193417	1500	O3	73	obj062bridge.jpg	2-			NMM				BRIDGE_n	Accept++	BRIDGE
+194864	195936	1072	O3	74	corn2.png	1			NMM		changed from CORN to CORN_1 (CORN does not exist)		CORN_n	Accept++	CORN_1
+197409	198851	1442	O3	75	obj121deer.jpg	2+			NMM				DEER_n	Accept++	DEER
+200410	201595	1185	O3	76	obj394shoulder.jpg	1			NMM				SHOULDER_n	Accept++	SHOULDER
+202781	203924	1143	O3	77	obj157fish.jpg	1			NMM				FISH_n	Accept++	FISH
+205376	206433	1057	O3	78	strawberry2.png	1			NMM				STRAWBERRY_n	Accept++	STRAWBERRY
+207685	208914	1229	O3	79	icecream.png	1			NMM				ICE CREAM_n	Accept++	ICECREAM
+210178	211435	1257	O3	80	obj119cup.jpg	2-			NMM				CUP_n	Accept++	CUP
+212758	213943	1185	O3	81	obj095church.jpg	2-			NMM				CHURCH_n	Accept++	CHURCH
+215288	216530	1242	O3	82	obj078canoe.jpg	2+							CANOE_n	Accept+-	BOAT
+219504	220690	1186	O3	83	obj064brush.jpg	1			NMM				BRUSH_n	Accept++	BRUSH
+222262	223519	1257	O3	84	boat.png	2+			NMM: (mouthing 'ship')				BOAT_n	Accept++	BOAT
+225457	226943	1486	O3	85	obj320pineapple.jpg	1			NMM				PINEAPPLE_n	Reject	
+228282	229139	857	O3	86	airplane2.png	1			NMM				AIRPLANE_n	Accept++	AIRPLANE
+231331	232688	1357	O3	87	football3.png	2+			NMM				FOOTBALL_n	Accept++	FOOTBALL
+234348	235519	1171	O3	88	obj489waiter.jpg	2+							WAITER_n	Accept++	WAITER
+237141	238641	1500	O3	89	obj389sheep.jpg	2-			NMM				SHEEP_n	Accept++	SHEEP
+239930	241144	1214	O3	90	motorcycle.png	2-							MOTORCYCLE_n	Accept++	MOTORCYCLE
+242547	243504	957	O3	91	salt.png	2-							SALT_n	Accept++	SALT
+245392	246592	1200	O3	92	obj251lobster.jpg	2+							LOBSTER_n	Accept++	LOBSTER
+247988	249203	1215	O3	93	train.png	2-							TRAIN_n	Accept++	TRAIN
+250666	252109	1443	O3	94	obj204helmet.jpg	2+			NMM				HELMET_n	Accept++	HELMET
+253267	254538	1271	O3	95	pencil.png	2-			NMM		changed to WRITE	He stated 'write' but his mouthing said pencil. Check it.	WRITE-v	Accept++	WRITE
+255867	257067	1200	O3	96	obj353rhinoceros.jpg	1							RHINO_n	Accept++	RHINO
+259718	261147	1429	O3	97	obj127doctor.jpg	2-			NMM				DOCTOR_n	Accept++	DOCTOR
+263527	264770	1243	O3	98	obj392shirt.jpg	2-	Check it.				check if this is a legit sign		BUTTON UP SHIRT_n	Accept+-	BUTTONUP
+266143	267300	1157	O3	99	knife2.png	2-							KNIFE_n	Accept++	KNIFE.2
+268586	269744	1158	O3	100	horse.png	1			NMM				HORSE_n	Accept++	HORSE
+272874	274959	2085	O3	101	obj144egg.jpg	2-						Check it.	~EGG_n CL: cup?	Reject	
+276453	277511	1058	O3	102	obj349rake.jpg	2-			NMM				!RAKE_n	Accept++	RAKE
+279351	280922	1571	O3	103	obj220jacket.jpg	2-					changed from JACKET.2 to JACKET.4		JACKET_n	Accept++	JACKET.4
+282460	283732	1272	O3	104	obj047wood.jpg	2-							WOOD_n	Accept++	WOOD
+286248	287391	1143	O3	105	obj143earring.jpg	1							Don't Know	Reject	
+289074	290217	1143	O3	106	bird2.png	1			NMM				BIRD_n	Accept++	BIRD
+291598	292870	1272	O3	107	obj188guitar.jpg	2-							GUITAR_n	Accept++	GUITAR
+294373	295473	1100	O3	108	obj444teeth.jpg	1			NMM				TEETH_n	Accept++	TEETH
+297476	299119	1643	O3	109	ball.png	2-			NMM			Spell Ball then sign ball.	#BALL_n	Reject	
+300436	301422	986	O3	110	obj075candle.jpg	2-							CANDLE_n	Accept++	CANDLE
+302680	303980	1300	O3	111	butterfly2.png	2+							BUTTERFLY_n	Accept++	BUTTERFLY
+305309	306323	1014	O3	112	obj259match.jpg	2-			NMM		changed from MATCH to MATCHSTICK, and to ++		MATCH_n	Accept++	MATCHSTICK
+308154	309297	1143	O3	113	obj252lock.jpg	2+			NMM		changed from LOCK.2 to LOCK.1		LOCK_n	Accept++	LOCK.1
+310690	311876	1186	O3	114	obj180glass.jpg	2-							GLASS_n	Accept++	GLASS
+313427	314613	1186	O3	115	squirrel.png	2+							SQUIRREL_n	Accept++	SQUIRREL
+315929	317201	1272	O3	116	obj319pillow.jpg	2+			NMM		changed from PILLOW to PILLOW.1		PILLOW_n	Accept++	PILLOW.1
+318455	319541	1086	O3	117	apple2.png	1			NMM				APPLE_n	Accept++	APPLE
+320823	322209	1386	O3	118	obj376saw.jpg	2-					changed from SAW.1 to WOOD	Saw and wood (same sign)	SAW_n	Accept++	WOOD
+323851	325294	1443	O3	119	helicopter.png	2-							HELICOPTER.2_n	Accept+-	HELICOPTER.2
+326695	328124	1429	O3	120	sandwich.png	2+			NMM				SANDWICH_n	Accept++	SANDWICH
+329801	331258	1457	O3	121	obj423stethoscope.jpg	2+							EARBUDS_n	Reject	
+332681	333852	1171	O3	122	pig.png	1			NMM				PIG_n	Accept++	PIG
+335417	336575	1158	O3	123	obj038bee.jpg	1			NMM				BEE_n	Accept++	BEE
+337792	338963	1171	O3	124	obj145elephant.jpg	1							ELEPHANT_n	Accept++	ELEPHANT
+340417	341674	1257	O3	125	obj307pear.jpg	2-							PEAR_n	Accept++	PEAR
+343584	344998	1414	O3	126	obj011arm.jpg	2-							ARM_n	Accept++	ARM
+346715	348000	1285	O3	127	obj074can.jpg	2-			NMM		changed this from CAN.3 to CAN.2 and also changed the FMP entry		CAN_n	Accept++	CAN.2
+349195	350295	1100	O3	128	obj276music.jpg	2-			NMM				MUSIC_n	Accept++	MUSIC
+352169	353498	1329	O3	129	obj304peach.jpg	1			NMM				PEACH_n	Accept++	PEACH
+354844	355987	1143	O3	130	obj168fork.jpg	2-			NMM		changed from FORK to FORK.1 (IMR selected)		FORK_n	Accept++	FORK.1
+357438	358638	1200	O3	131	rabbit.png	2+			NMM				RABBIT_n	Accept++	RABBIT.1
+361762	363619	1857	O3	132	obj301parachute.jpg	2-						I don't understand. Check it.	give, parachute??	Reject	
+365212	366383	1171	O3	133	obj513witch.jpg	2-			NMM					WITCH_n	Accept++	WITCH.1
+367875	369032	1157	O3	134	golf.png	2+			NMM				GOLF_n	Accept++	GOLF
+370820	372049	1229	O3	135	telephone.png	1			NMM				TELEPHONE_n	Accept++	TELEPHONE
+373215	374400	1185	O3	136	wristwatch.png	2-			NMM		changed to ++		WRISTWATCH_n	Accept++	WRISTWATCH.2
+375717	376817	1100	O3	137	newspaper.png	2-			NMM				NEWSPAPER_n	Accept++	NEWSPAPER
+379420	380792	1372	O3	138	jelly3.png	2-			NMM				!JELLY_n	Accept++	JELLY.1
+382187	383501	1314	O3	139	stars.png	2+			NMM				STARS_n	Accept++	STARS
+385252	386338	1086	O3	140	salad2.png	2+			NMM				SALAD_n	Accept++	SALAD
+387791	389248	1457	O3	141	sweater.png	2+					changed from REJECT to ++, I think the picture shows a hoodie		HOODIE_n	Accept++	HOODIE
+391629	393144	1515	O3	142	farm.png	2-							FARM+HOUSE_n	Reject	
+468710	469981	1271	O4	144	obj516worm.jpg	2-							WORM-n	Accept++	WORM
+471412	472541	1129	O4	145	tomato2.png	2-							TOMATO-n	Accept++	TOMATO
+473787	474944	1157	O4	146	obj089chair.jpg	2-							CHAIR-n	Accept++	CHAIR
+476147	477447	1300	O4	147	obj248lipstick.jpg	1							LIPSTICK-n	Accept++	LIPSTICK
+478721	480035	1314	O4	148	bed2.png	2+							BED-n	Accept++	BED.1
+481217	482417	1200	O4	149	flower3.png	1							FLOWER-n	Accept++	FLOWER
+483726	484869	1143	O4	150	book2.png	2+			NMM				BOOK-n	Accept++	BOOK
+486021	487121	1100	O4	151	obj116cross.jpg	2-			NMM		changed from CROSS.1 to PLUS (this sign already exists in ASL LEXunder PLUS)		CROSS-n	Accept++	PLUS
+488725	489768	1043	O4	152	obj052boot.jpg	2+			NMM				BOOT-n	Accept++	BOOTS
+491225	492368	1143	O4	153	obj262microscope.jpg	2+							MICROSCOPE-n	Accept++	MICROSCOPE
+493849	495007	1158	O4	154	obj365rope.jpg	2+			NMM				ROPE-n	Accept++	ROPE
+497338	498523	1185	O4	155	obj401skis.jpg	2+							SKI-n	Accept++	SKI
+499868	501182	1314	O4	156	obj186grapes.jpg	2-							GRAPES-n	Accept++	GRAPES
+502278	503435	1157	O4	157	obj236leaf.jpg	2-							LEAF-n	Accept++	LEAF.1
+505109	506480	1371	O4	158	obj126dinosaur.jpg	2-							DINOSAUR-n	Accept++	DINOSAUR
+507648	508876	1228	O4	159	obj050bone.jpg	2+							BONE-n	Accept++	BONE
+510015	511300	1285	O4	160	spoon2.png	2-							SPOON-n	Accept++	SPOON
+512625	513868	1243	O4	161	obj287onion.jpg	1							ONION_n	Accept++	ONION
+515157	516243	1086	O4	162	obj411sock.jpg	2+							SOCK_n	Accept++	SOCKS
+517852	519138	1286	O4	163	obj294paint.jpg	2-					changed from PAINT.2 to DRAW (already i ASLLEX) but marked it as +-		DRAW-n	Accept+-	DRAW
+520361	521261	900	O4	164	obj458toilet.jpg	1							TOILET-n	Accept++	TOILET
+523335	524620	1285	O4	165	obj442tear.jpg	1							TEAR-n	Accept++	TEAR
+525931	527145	1214	O4	166	cat.png	1							CAT-n	Accept++	CAT.1
+529163	530406	1243	O4	167	carrot2.png	1			NMM				CARROT-n	Accept++	CARROT.1
+532638	534223	1585	O4	168	bottle2.png	2-						Check it.	MILK, BOTTLE	Accept+-	MILK, BOTTLE
+535911	537125	1214	O4	169	obj022bag.jpg	1							#BAG	Reject	#BAG
+539342	540656	1314	O4	170	obj235lawnmower.jpg	2+			NMM				LAWNMOWER-n	Accept++	LAWNMOWER
+542481	543852	1371	O4	171	monkey.png	2+							MONKEY-n	Accept++	MONKEY
+545719	546990	1271	O4	172	obj269mop.jpg	2+			NMM		changed from MOP.2 to MOP.1		MOP-n	Accept++	MOP.1
+549190	550447	1257	O4	173	obj165fly.jpg	1							BUG, FLY	Reject	BUG, #FLY
+554055	556283	2228	O4	174	obj265priest.jpg	2-			NMM			False start.	~CHURCH_n	Reject	~CHURCH
+557864	558835	971	O4	175	obj299paper.jpg	2+			NMM				PAPER-n	Accept++	PAPER
+560002	561002	1000	O4	176	obj152fence.jpg	2+			NMM				FENCE-n	Accept++	FENCE
+562738	563881	1143	O4	177	rooster.png	1			NMM				ROOSTER-n	Accept++	ROOSTER
+565305	566477	1172	O4	178	obj322pipe.jpg	1			NMM		this is on FMP as PIPE.2 - is this correct?		SUCK-v	Reject	SUCK
+567773	569016	1243	O4	179	obj134drawer.jpg	2+							DRAWER-n	Accept++	DRAWER
+570177	571306	1129	O4	180	obj396shower.jpg	1							SHOWER_n	Accept++	SHOWER
+572580	573722	1142	O4	181	obj475turkey.jpg	1			NMM: (mouthing 'turkey')		changed this to REJECT	Check it.	THANKGIVING_n	Reject	THANKSGIVING
+575018	576218	1200	O4	182	obj355ring.jpg	2-			NMM				RING_n	Accept++	RING
+578386	579600	1214	O4	183	obj085castle.jpg	2+			NMM				CASTLE_n	Accept++	CASTLE
+580971	582100	1129	O4	184	obj383screwdriver.jpg	2-							SCREWDRIVER_n	Accept++	SCREWDRIVER
+583600	584814	1214	O4	185	obj185gorilla.jpg	2+			NMM				GORILLA_n	Accept++	GORILLA
+586189	587331	1142	O4	186	sun.png	1			NMM				SUN_n	Accept++	SUN
+588597	589868	1271	O4	187	obj507whistle.jpg	1			NMM				WHISTLE_n	Accept++	WHISTLE
+591126	592440	1314	O4	188	obj361rollerskate.jpg	2+							ROLLERSKATE_n	Accept++	ROLLERSKATING
+593692	595049	1357	O4	189	obj026banana.jpg	2-					changed from BANANA.1 to BANANA (same as ASLLEX)		BANANA_n	Accept++	BANANA
+596237	597437	1200	O4	190	rain.png	2+							RAIN_n	Accept++	RAIN
+598604	599919	1315	O4	191	bread2.png	2-							BREAD_n	Accept++	BREAD
+601712	602970	1258	O4	192	obj509windmill.jpg	2-			NMM				WINDMILL_n	Accept++	WINDMILL
+604320	605320	1000	O4	193	obj314piano.jpg	2+			NMM				PIANO_n	Accept++	PIANO
+606514	607629	1115	O4	194	obj225key.jpg	2-			NMM				KEY_n	Accept++	KEY
+608843	610014	1171	O4	195	shovel.png	2+			NMM				SHOVEL_n	Accept++	SHOVEL
+611380	612466	1086	O4	196	obj160flashlight.jpg	1			NMM	Compound signs			FLASHLIGHT_n	Accept++	FLASHLIGHT
+614076	615133	1057	O4	197	obj438tail.jpg	2-			NMM		changed from TAIL.1 to wag.1  (incorrectly glossed)		TAIL_n	Accept++	WAG.1
+616240	617383	1143	O4	198	obj138drum.jpg	2+			NMM				DRUM-n	Accept++	DRUM
+618507	619607	1100	O4	199	obj393shoe.jpg	2+			NMM				SHOES_n	Accept++	SHOES
+620765	622065	1300	O4	200	giraffe.png	1			NMM				GIRAFFE_n	Accept++	GIRAFFE
+623368	624525	1157	O4	201	lamp.png	1							LIGHT, ON	Reject	LIGHT, ON
+625826	627069	1243	O4	202	obj184goat.jpg	1							GOAT_n	Accept++	GOAT
+628273	629631	1358	O4	203	obj279necklace.jpg	2+			NMM				NEKLACE_n	Accept++	NECKLACE
+631000	632114	1114	O4	204	obj284nurse.jpg	2-			NMM				NURSE_n	Accept++	NURSE
+633622	634822	1200	O4	205	obj174gas.jpg	2-			NMM				GAS_n	Accept++	GAS
+635974	637103	1129	O4	206	box2.png	2+			NMM				BOX_n	Accept++	BOX
+638519	639633	1114	O4	207	obj398skateboard.jpg	2+							SKATEBOARDING-n	Accept++	SKATEBOARDING.1
+640785	641828	1043	O4	208	obj275mushroom.jpg	2-			NMM				MUSHROOM_n	Accept++	MUSHROOM
+643188	644431	1243	O4	209	obj227kite.jpg	2-			NMM				KITE_n	Accept++	KITE
+646221	647293	1072	O4	210	obj120curtains.jpg	2+			NMM		sloppy sign	Check it.	CURTAIN-n	Accept++	CURTAIN
+648525	649782	1257	O4	211	obj101cloud.jpg	2+							CLOUD_n	Accept++	CLOUD.2
+651649	652678	1029	O4	212	obj254magnet.jpg	2+			NMM				MAGNET_n	Accept++	MAGNET
+654244	655573	1329	O4	213	obj129doll.jpg	1			NMM				GIRL, DOLL	Reject	GIRL, DOLL
+656891	657962	1071	O4	214	obj190hair.jpg	1			NMM				HAIR_n	Accept++	HAIR
+659436	660579	1143	O4	215	obj272mountain.jpg	2-			NMM	Compound signs			MOUNTAIN_n	Accept++	MOUNTAIN
+662589	663918	1329	O4	216	obj345radio.jpg	1			NMM			Check it.	RADIO_n	Accept++	RADIO
+665221	666378	1157	O4	217	obj159flag.jpg	2-			NMM				FLAG_n	Accept++	FLAG
+667438	668523	1085	O4	218	obj054bowl.jpg	2+			NMM				BOWL_n	Accept++	BOWL
+671276	672633	1357	O4	219	obj122dentist.jpg	1			NMM			He seem sign teeth. Check it.	TEETH_n	Reject	DENTIST.1
+673908	675065	1157	O4	220	obj358rock.jpg	2-			NMM				ROCK_n	Accept++	ROCK
+676513	677656	1143	O4	221	lighting2.png	1							LIGHTING_n	Accept++	LIGHTING
+678953	680196	1243	O4	222	stairs.png	1			NMM				STAIRS_n	Accept++	STAIRS
+681513	682913	1400	O4	223	obj179girl.jpg	1			NMM				GIRL_n	Accept++	GIRL
+686779	687807	1028	O4	224	obj161wine.jpg	1							Don't know	Reject	DONT KNOW
+691261	692333	1072	O4	225	obj240letter.jpg	2-			NMM				LETTER_n	Accept++	LETTER
+693993	695222	1229	O4	226	man.png	1			NMM				MAN_n	Accept++	MAN
+696675	697761	1086	O4	227	obj150faucet.jpg	2+							FAUCET_n	Accept++	FAUCET
+699272	700315	1043	O4	228	obj096cigarette.jpg	2-							CIGARETTE_n	Accept++	CIGARETTE
+702048	703234	1186	O4	229	obj100clothespin.jpg	1			NMM		changed from PEG.1 to PEG.4		PEG-n	Accept++	PEG.4
+704708	705951	1243	O4	230	obj044binoculars.jpg	2+							BINOCULARS_n	Accept++	BINOCULARS
+707168	708326	1158	O4	231	obj453tie.jpg	1			NMM				TIE_n	Accept++	TIE
+709943	711043	1100	O4	232	obj224kangaroo.jpg	2+							KANGAROO_n	Accept++	KANGAROO
+712418	713632	1214	O4	233	obj099clock.jpg	2-				Compound signs			CLOCK_n	Accept++	CLOCK
+715763	716820	1057	O4	234	obj061bride.jpg	2-						Check it.	WEEDING_n	Accept+-	WEDDING
+718087	719387	1300	O4	235	baby2.png	2+							BABY_n	Accept++	BABY
+720631	721916	1285	O4	236	obj433sweater.jpg	2+							SWEATER_n	Accept++	SWEATER
+723426	724626	1200	O4	237	obj125diaper.jpg	2+			NMM				DIAPER_n	Accept++	DIAPER
+726505	727676	1171	O4	238	city2.png	2+			NMM				CITY_n	Accept++	CITY
+728943	730114	1171	O4	239	washmachine.png	2+							WASHMACHINE_n	Accept++	WASHMACHINE
+731866	733052	1186	O4	240	obj485violin.jpg	2-							GUITAR_n	Reject	GUITAR
+734655	735955	1300	O4	241	obj114crackers.jpg	2-			NMM				CRACKER-n	Accept++	CRACKER
+737287	738502	1215	O4	242	obj510window.jpg	2+			NMM				WINDOW_n	Accept++	WINDOW
+739819	740876	1057	O4	243	obj356road.jpg	2+			NMM				ROAD_n	Accept++	ROAD
+742086	743601	1515	O4	244	pants.png	2+			NMM				PANTS_n	Accept++	PANTS.1
+745182	746440	1258	O4	245	lion.png	1			NMM				LION_n	Accept++	LION
+747781	748996	1215	O4	246	obj445telephone.jpg	1			NMM				TELEPHONE_n	Accept++	TELEPHONE
+750227	751413	1186	O4	247	hammer2.png	1			NMM				HAMMER_n	Accept++	HAMMER
+753559	754574	1015	O4	248	obj315picture.jpg	2-			NMM: (mouthing 'paint')		could this sign be used as 'painting'?		PAINTBRUSH_n	Reject	PAINTBRUSH
+756104	757418	1314	O4	249	obj241lettuce.jpg	1			NMM				LETTUCE_n	Accept++	LETTUCE
+758702	760016	1314	O4	250	owl.png	2+			NMM				OWL_n	Accept++	OWL
+761367	762709	1342	O4	251	obj226king.jpg	1			NMM				KING_n	Accept++	KING
+764432	765504	1072	O4	252	obj213house.jpg	2+			NMM				HOUSE_n	Accept++	HOUSE
+766747	767805	1058	O4	253	obj449tent.jpg	2+			NMM				TENT_n	Accept++	TENT
+769771	771071	1300	O4	254	obj293paintbrush.jpg	2-						Unclear. Check it.	PAINTBRUSH_n	Accept++	PAINTBRUSH
+772601	773701	1100	O4	255	obj091cherry.jpg	2-			NMM				CHERRY_n	Accept++	CHERRY.1
+776116	777116	1000	O4	256	obj285nut.jpg	1							Don't know	Reject	DONT KNOW
+778368	779796	1428	O4	257	obj183glove.jpg	2+			NMM				GLOVES_n	Accept++	GLOVES
+781134	781992	858	O4	258	obj447tv.jpg	1			NMM				TV_n	Accept++	TV
+783188	784431	1243	O4	259	obj201heart.jpg	1			NMM				HEART_n	Accept++	HEARTBODY
+785790	786990	1200	O4	260	obj454tiger.jpg	2+			NMM				TIGER_n	Accept++	TIGER
+788315	789629	1314	O4	261	bear.png	2+			NMM				BEAR_n	Accept++	BEAR
+790726	791998	1272	O4	262	obj000star.jpg	2+			NMM				STAR_n	Accept++	STARS
+794130	795259	1129	O4	263	obj400skirt.jpg	2-			NMM				SKIRT_n	Accept++	SKIRT
+796461	797718	1257	O4	264	table.png	2-			NMM				TABLE_n	Accept++	TABLE
+799071	800414	1343	O4	265	obj090cheese.jpg	2-			NMM				CHEESE_n	Accept++	CHEESE
+801480	802695	1215	O4	266	obj148eye.jpg	1			NMM				EYES_n	Accept++	EYES
+804941	806198	1257	O4	267	obj123desert.jpg	2-			NMM	Compound signs			DESERT_n	Accept++	DESERT
+807349	808563	1214	O4	268	obj332popcorn.jpg	2+			NMM				POPCORN_n	Accept++	POPCORN
+809924	810996	1072	O4	269	basketball2.png	2+			NMM				BASKETBALL_n	Accept++	BASKETBALL
+812371	813599	1228	O4	270	soup.png	2-			NMM				SOUP_n	Accept++	SOUP
+815095	816310	1215	O4	271	money.png	2-							MONEY_n	Accept++	MONEY
+817970	819342	1372	O4	272	balloon.png	2-			NMM	Compound signs			BALLOON_n	Accept++	BALLOON
+820938	822252	1314	O4	273	garage.png	2-			NMM				GARAGE_n	Accept++	GARAGE
+823393	824536	1143	O4	274	milk2.png	1			NMM				MILK_n	Accept++	MILK
+825804	826975	1171	O4	275	soda2.png	2-							SODA_n	Accept++	SODA
+828400	829828	1428	O4	276	bath2.png	2-			NMM			Check it.	?BATH, TOILET	Reject	BATH, TOILET
+831067	832396	1329	O4	277	baseball2.png	2+			NMM				BASEBALL_n	Accept++	BASEBALL
+833941	835299	1358	O4	278	tea.png	2-			NMM:(mouthing coffe)				COFFE_n	Reject	COFFEE
+1340519	1341705	1186	A3	287	act218plant.jpg	2+			NMM				SOW_v	Accept++	SOW
+1343279	1344408	1129	A3	288	act139massage.jpg	2+			NMM				MASSAGE_v	Accept++	MASSAGE
+1346125	1347468	1343	A3	289	act215snow.jpg	2+							SNOW-v	Accept++	SNOW.1
+1349292	1350335	1043	A3	290	act048count.jpg	2-			NMM				COUNT-v	Accept++	COUNT
+1351724	1352767	1043	A3	291	act201shower.jpg	1			NMM		lazy sign		SHOWER_n	Accept++	SHOWER
+1354398	1355440	1042	A3	292	act164pour.jpg	1			NMM				POUR_v	Accept++	POUR
+1357329	1358529	1200	A3	293	act019bounce.jpg	2+			NMM: (mouthing 'play')				~PLAY-v	Reject	PLAY
+1360311	1361454	1143	A3	294	act264whisper.jpg	1			NMM				WHISPER-v	Accept++	WHISPER
+1363007	1364064	1057	A3	295	act071dust.jpg	2-			NMM: (mouthing 'clean')		changed from +- to ++		CLEAN-v	Accept++	CLEAN
+1365900	1367029	1129	A3	296	act142melt.jpg	2+			NMM				MELT-v	Accept++	MELT
+1368445	1369531	1086	A3	297	act046cook.jpg	2-			NMM				COOK-v	Accept++	COOK
+1371012	1372127	1115	A3	298	act012bake.jpg	2-			NMM				BAKE-v	Accept++	BAKE
+1375879	1376865	986	A3	299	act144mine.jpg	1							Don't Know	Reject	
+1379822	1380879	1057	A3	300	act043comb.jpg	1			NMM				COMB-v	Accept++	COMB.1
+1382460	1383631	1171	A3	301	act031carry.jpg	2+			NMM				CARRY-v	Accept++	CARRY
+1386184	1387527	1343	A3	302	act224spread.jpg	2-							SPREAD-v	Accept++	SPREAD
+1389265	1390350	1085	A3	303	act239swim.jpg	2+			NMM				SWIM-v	Accept++	SWIM
+1391889	1393104	1215	A3	304	act208slice.jpg	2-			NMM		changed from SLICE to SLICE.2		SLICE_v	Accept++	SLICE.2
+1394563	1395592	1029	A3	305	act248tie.jpg	2+			NMM				TIE-v	Accept++	TIE.1
+1397171	1398171	1000	A3	306	act067drive.jpg	2+			NMM			S- handshape. Lex.	DRIVE-n	Accept++	CAR
+1400110	1401324	1214	A3	307	act069drown.jpg	2-			NMM				DROWN_v	Accept++	DROWN.1
+1403172	1404458	1286	A3	308	act100whisper.jpg	1			NMM			He stated secret then whisper. Check it.	SECRET, WHISPER_v	Reject	SECRET, WHISPER
+1407739	1409196	1457	A3	309	act206cut.jpg	2-						I noticed that the picture bring confusion to some deaf frequently. Their facial expression shows unsure.	cut-CA	Reject	is this CA?
+1410932	1412061	1129	A3	310	act008walk.jpg	2+			NMM		lazy production?		WALK-v	Accept++	WALK
+1413792	1414806	1014	A3	311	act089run.jpg	1			NMM	Compound signs		Clasifies.	RUN, FAUCET	Accept++	RUN_FAUCET
+1417295	1418367	1072	A3	312	act222splash.jpg	2+			NMM			His facial expression showed confusion. 	CHAT-v	Reject	CHAT
+1420198	1421212	1014	A3	313	act214sneeze.jpg	1			NMM				SNEEZE-v	Accept++	SNEEZE.1
+1422801	1423859	1058	A3	314	act087fish.jpg	2+			NMM				FISHING-v	Accept++	FISHING
+1425398	1426298	900	A3	315	act270wrap.jpg	2+			NMM: (mouthing 'open')			Check it.	OPEN_v	Reject	OPEN
+1428301	1429586	1285	A3	316	act036cheer.jpg	2+						Check it.	CHEERLEADER-v	Accept++	CHEERLEADER
+1431211	1432297	1086	A3	317	act070dry.jpg	1				Compound signs.			HAIRDRYER_v	Accept++	HAIRDRYER
+1433807	1434893	1086	A3	318	act111howl.jpg	2+							HOWL_v	Accept++	HOWL.1
+1438073	1440073	2000	A3	319	act025buckle.jpg	2-							~??	Reject	~??
+1442183	1443355	1172	A3	320	act151parachute.jpg	2-							PARACHUTE-v	Accept++	PARACHUTE
+1445294	1446151	857	A3	321	act068break.jpg	2+			NMM:(mouthing 'drop')				DROP-v	Accept+-	DROP
+1448587	1449558	971	A3	322	act028pay.jpg	2-			NMM: (mouthing 'buy')				BUY-v	Accept++	BUY
+1451426	1452626	1200	A3	323	act129light.jpg	2-				Compound signs			LIGHT_CANDLE-v	Accept+-	LIGHT_CANDLE
+1454637	1455737	1100	A3	324	act138marry.jpg	2-			NMM: 'wedding'		'to wed"		WEDDING-v	Accept++	WEDDING
+1457268	1458325	1057	A3	325	act204sit.jpg	2-			NMM				SIT-v	Accept++	SIT
+1460663	1461791	1128	A3	326	act183sail.jpg	2+							BOAT-v	Accept+-	BOAT
+1463909	1465066	1157	A3	327	act109hit.jpg	2+							BASEBALL-v	Accept++	BASEBALL
+1467240	1468369	1129	A3	328	act097give.jpg	2+							GIFT-v	Accept+-	GIFT
+1470414	1471500	1086	A3	329	act202sing.jpg	2-			NMM				SING-v	Accept++	SING
+1473283	1474383	1100	A3	330	act016bite.jpg	2-			NMM	Compound signs		He stated that: bite to person. 	BITE_v	Accept++	BITE.1
+1475987	1477059	1072	A3	331	act275zip.jpg	1			NMM		opposite direction of mov		ZIP_v	Accept++	ZIP
+1480517	1481689	1172	A3	332	act074erase.jpg	1						CHECK IT. 	LECTURE-v	Reject	LECTURE
+1483539	1484510	971	A3	333	act252type.jpg	2+			NMM				KEYBOARD-v	Accept++	KEYBOARD
+1486991	1488191	1200	A3	334	act056decorate.jpg	2+							DECORATE-v	Accept++	DECORATE
+1489701	1490816	1115	A3	335	act092follow.jpg	2+							FOLLOW-v	Accept++	FOLLOW
+1493211	1494511	1300	A3	336	act135mail.jpg	2-							MAIL, SEND-V	Reject	MAIL, SEND
+1496470	1497641	1171	A3	337	act095cry.jpg	2+			NMM		incomplete production, but OK		SAD-v	Accept+-	SAD
+1499691	1501006	1315	A3	338	act049crash.jpg	2-							CRASH_PLANE-v	Accept+-	CRASH_PLANE
+1502748	1503891	1143	A3	339	act253vacuum.jpg	1			NMM				VACUUM-v	Accept++	VACUUM
+1506330	1507458	1128	A3	340	act032carve.jpg	2-					changed from CARVE.1 to CARVE	Both: S-hanshape.	CARVE-v	Accept++	CARVE
+1509162	1510348	1186	A3	341	mopping.png	2+			NMM				MOP-v	Accept++	MOP
+1512122	1513293	1171	A3	342	act094arrest.jpg	2+			NMM			Fisk: cheeleader.	FRISK-v	Accept+-	FRISK
+1514973	1516330	1357	A3	343	act268wash.jpg	1							wash_window-CA	Accept++	ERASE.1
+1518818	1520247	1429	A3	344	act088float.jpg	1							#FLOAT	Reject	#FLOAT
+1522986	1524414	1428	A3	345	act188itch.jpg	2-			NMM			Double signs.	ITCH-CA	Accept++	ITCH
+1525968	1527025	1057	A3	346	act004ski.jpg	2+			NMM				SKI_v	Accept++	SKI
+1528378	1529449	1071	A3	347	act024brush.jpg	1			NMM				TOOTHBRUSH-v	Accept++	TOOTHBRUSH
+1531109	1532366	1257	A3	348	act216somersault.jpg	2+					changed from SOMERSAULT.2 to .3 (incorrectly glossed)	Not sure. Check it. 	SOMERSAULT-CL	Accept++	SOMERSAULT.3
+1534006	1535335	1329	A3	349	act106hang.jpg	2-							HANG_CLOTHES-CL	Accept+	PEG.2
+1537095	1538180	1085	A3	350	rain.png	2+			NMM				RAIN_v	Accept++	RAIN
+1539845	1541017	1172	A3	351	act083fight.jpg	2+			NMM				FIGHT-v	Accept++	FIGHT
+1542654	1543882	1228	A3	352	act131load.jpg	2+						I don't understand. 	?	Reject	?
+1545693	1546893	1200	A3	353	act185saw.jpg	2-							SAW-v	Accept++	SAW.1
+1548989	1550003	1014	A3	354	act014bark.jpg	2+			NMM			He signed same for 'howl'	BARK-v	Accept++	BARK.1
+1551706	1553006	1300	A3	355	act209slide.jpg	2-			NMM				SLIDE_v	Accept++	SLIDE.1
+1554566	1555952	1386	A3	356	act258wash.jpg	2+			NMM			Heavy cry.	CRY_v	Reject	CRY
+1558098	1559127	1029	A3	357	act098glue.jpg	1							#GLUE	Reject	#GLUE
+1560863	1561978	1115	A3	358	act177save.jpg	2+					changed to RESCUE, same sign as SAFE		RESCUE-v	Accept++	RESCUE
+1563700	1564872	1172	A3	359	act060dip.jpg	2-							DIP-v	Accept++	DIP
+1566267	1567496	1229	A3	360	act178ride.jpg	2-					changed to RIDE_2, glossed incorrectly as RIDE		RIDE_v	Accept++	RIDE_2
+1569048	1570305	1257	A3	361	act029yell.jpg	1			NMM				SHOUT-v	Accept++	SHOUT
+1572314	1573457	1143	A3	362	act242teach.jpg	2+			NMM				TEACH-v	Accept++	TEACH.1
+1574924	1576195	1271	A3	363	act272write.jpg	2-							WRITE-v	Accept++	WRITE
+1577484	1578499	1015	A3	364	act207sleep.jpg	1			NMM				SLEEP-v	Accept++	SLEEP
+1580157	1581343	1186	A3	365	act205skate.jpg	2+							ROLLERSKATING-v	Accept++	ROLLERSKATING
+1583431	1584545	1114	A3	366	act137march.jpg	2+			NMM		changed to REJECT, sloppy production		?-CL	Reject	?-CL
+1586127	1587312	1185	A3	367	act238sweep.jpg	2-							SWEEP-v	Accept++	SWEEP
+1590528	1591643	1115	A3	368	act221cough_spit.jpg	1						I don't understand. Check it. 	?CA	Reject	?CA
+1592995	1594409	1414	A3	369	act240swing.jpg	2-			NMM				SWING-v	Accept++	SWING_2
+1597338	1598681	1343	A3	370	act241laugh.jpg	1							DROOL_v	Reject	DROOL
+1600247	1601518	1271	A3	371	act021bowl.jpg	1			NMM		Is this a legit sigh? seems like a weird prodcution		BOWLING-v	Accept++	BOWLING.1
+1603148	1604391	1243	A3	372	act154pet.jpg	2-			NMM				PET-v	Accept++	PET.1
+1606351	1607808	1457	A3	373	act179roar.jpg	1							SHOUT-v	Accept++	SHOUT
+1609590	1610733	1143	A3	374	act105arrest.jpg	2+			NMM				ARREST-v	Accept++	ARREST_1
+1613457	1614557	1100	A3	375	act261wave.jpg	1			WAVE-v.1				WAVE_v	Accept++	WAVE.1
+1616489	1617746	1257	A3	376	act232suck.jpg	2-							LICK_v	Reject	LICK
+1619498	1620612	1114	A3	377	act127relax.jpg	2-			NMM		this could amost be a classifier, but it looks like misproduction of SIT. Flagged	Check it. 	RELAX-CL	Accept++	RELAX.1
+1622833	1623962	1129	A3	378	act180roast.jpg	2-			NMM				COOK-v	Reject	COOK
+1625493	1626550	1057	A3	379	act257walk.jpg	2+			NMM				WALK-v	Accept++	WALK
+1628032	1629246	1214	A3	380	act234surf.jpg	2-			NMM				SURF-v	Accept++	SURF
+1631135	1632435	1300	A3	381	act096cook.jpg	2-			NMM		flagged, he looks confused at the end but no hesitation at the start of the production		COOK-v	Accept++	COOK
+1635111	1636797	1686	A3	382	act057deliver.jpg	1							~?	Reject	~?
+1638194	1639379	1185	A3	383	act246throw.jpg	1			NMM				THROW_v	Accept++	THROW
+1641054	1642282	1228	A3	384	act015beg.jpg	2-			NMM				BEG-v	Accept++	BEG
+1644480	1645794	1314	A3	385	act200shoot.jpg	2+			NMM			Use two hands: L-handshape.	SHOOT-v	Accept++	SHOOT
+1647848	1649005	1157	A3	386	act114iron.jpg	2-			NMM				IRON-v	Accept++	IRON
+1650722	1652065	1343	A3	387	act159plow.jpg	1							FARM-n	Reject	FARM
+1654232	1655518	1286	A3	388	act078explode.jpg	2+			NMM				EXPLODE-v	Accept++	POP.3
+1657129	1658629	1500	A3	389	act225squeeze.jpg	2-			NMM				??SQUEEZE_v	Reject	?
+1660332	1661790	1458	A3	390	act186punish.jpg	2-			NMM				PUNISH-v	Accept++	PUNISH
+1663942	1665585	1643	A3	391	act227stand.jpg	2-			NMM: 'stretch'				STRETCH-v	Reject	STRETCH
+1667773	1669330	1557	A3	392	act075erupt.jpg	2-			NMM				ERUPT-v	Accept++	ERUPT
+1670819	1672019	1200	A3	393	act191serve.jpg	2+			NMM				SERVE-v	Accept++	SERVE
+1674015	1675186	1171	A3	394	act081feed.jpg	2+			NMM				FEED-v	Accept++	FEED
+1677459	1678573	1114	A3	395	act009fly.jpg	2-						I think that the picture seem dog follow owl. Check it. 	FOLLOW-v	Reject	FOLLOW
+1680355	1681398	1043	A3	396	camping2.png	2+			NMM				CAMPING-v	Accept++	CAMPING
+1682829	1683901	1072	A3	397	act149open.jpg	2+			NMM				OPEN-v	Accept++	OPEN
+1687174	1688388	1214	A3	398	act262sew.jpg	2+							WEAVE-v	Accept++	WEAVE
+1690135	1691149	1014	A3	399	act101shake.jpg	2+							MEET-v	Accept++	MEET
+1692937	1694066	1129	A3	400	act113hunt.jpg	2+			NMM				SHOOTING-v	Accept++	SHOOTING
+1695669	1696898	1229	A3	401	act189carve.jpg	2-						Use: A-handshape.	CARVE-v	Accept++	SCULPT
+1698538	1699896	1358	A3	402	act026burn.jpg	2+							BURN-v	Accept++	BURN
+1701828	1702942	1114	A3	403	act166propose.jpg	2+			NMM				PROPOSE-v	Accept++	PROPOSE
+1704508	1705537	1029	A3	404	act247tickle.jpg	2+						He seems sign: tyoe. Check it.	TICKLE-v	Accept++	TICKLE
+1709147	1710547	1400	A3	405	act013balance.jpg	2-						False start.	~DANCE_v	Reject	
+1712357	1713786	1429	A3	406	act156pinch.jpg	1			NMM				PINCH-v	Accept++	PINCH
+1716095	1718024	1929	A3	407	act197shave.jpg	2-			NMM				SHAVE-v	Accept++	SHAVE_2
+1719699	1720970	1271	A3	408	act116juggle.jpg	2+			NMM				JUGGLE-v	Accept++	JUGGLE
+1722860	1724017	1157	A3	409	act017sniff.jpg	1						Sign can be eat or sniff	sniff-v	Reject	SNIFF
+1726636	1728793	2157	A3	410	act150operate.jpg	1						False start and signs not clear	?	Reject	?
+1731238	1732509	1271	A3	411	act108hide.jpg	2-			NMM				HIDE-v	Accept++	HIDE
+1830676	1831833	1157	A4	413	act228steal.jpg	2-							STEAL-v	Accept++	STEAL
+1833180	1834194	1014	A4	414	act118kick.jpg	2-							KICK-v	Accept++	KICK
+1835711	1836783	1072	A4	415	act006blow.jpg	1			NMM				BLOW-v	Accept++	BLOW
+1838144	1839458	1314	A4	416	act196shave.jpg	1			NMM				SHAVE-v	Accept++	SHAVE_3
+1841383	1842712	1329	A4	417	act133look.jpg	1			NMM				LOOK_AT, ?	Reject	LOOK_AT, ?
+1844945	1846245	1300	A4	418	act022box.jpg	2+			NMM				BOXING-v	Accept++	BOXING
+1847720	1849163	1443	A4	419	act250tow.jpg	2+			NMM				TOW-v	Accept++	TOW.2
+1851151	1852165	1014	A4	420	act007argue.jpg	1						he signs with one hand. Check it.	??BLAME	Reject	?
+1853995	1855238	1243	A4	421	act203sink.jpg	1							THROW-v	Reject	THROW
+1856999	1858442	1443	A4	422	act063drag.jpg	2+						Not sure. Check it.	~DELIVER_v	Reject	~DELIVER
+1859874	1861002	1128	A4	423	act035chase.jpg	2-							CHASE-v	Accept++	CHASE
+1862263	1863577	1314	A4	424	act112hug.jpg	2+							HUG-v	Accept++	HUG
+1865201	1866216	1015	A4	425	act064write.jpg	2-							WRITE-v	Accept++	WRITE
+1868517	1869817	1300	A4	426	act155pick.jpg	2-							CUT-v	Accept++	TRIM.1
+1871476	1872576	1100	A4	427	act059dig.jpg	2+			NMM				DIG-v	Accept++	DIG_UP
+1874908	1875936	1028	A4	428	act037chew.jpg	2+							PLAY-v	Reject	PLAY
+1879987	1881144	1157	A4	429	act061cut.jpg	1							Don't Know	Reject	DONT KNOW
+1882762	1883876	1114	A4	430	act140measure.jpg	2+							MEASURE-v	Accept++	MEASURE
+1885287	1886330	1043	A4	431	act120kneel.jpg	2-			NMM				KNEEL_v	Accept++	KNEEL
+1888019	1889304	1285	A4	432	act053curl.jpg	1							CURL-v	Accept++	CURL
+1890871	1891914	1043	A4	433	act110hitchhike.jpg	1							HITCHHIKE-v	Accept++	HITCHHIKE
+1894289	1895360	1071	A4	434	act190sell.jpg	2+						Unclear.	?	Reject	?
+1896833	1897947	1114	A4	435	act263weigh.jpg	2-							WEIGH-v	Accept++	WEIGH
+1899971	1901357	1386	A4	436	act153peel.jpg	2-						False Start. He signs both hand with A-handshape.	~PEEL	Reject	~PEEL
+1904175	1905160	985	A4	437	act103grind.jpg	1							Don't know	Reject	DONT KNOW
+1907419	1908519	1100	A4	438	act271twist.jpg	2+							BOOK-v	Reject	BOOK
+1911181	1912381	1200	A4	439	act229sting.jpg	2-			NMM				STING-v	Accept++	STING
+1914334	1915563	1229	A4	440	act184salute.jpg	1			NMM				SALUTE-v	Accept++	SALUTE
+1917374	1918731	1357	A4	441	act122knit.jpg	2+							KNITTING-v	Accept++	KNITTING
+1920491	1921819	1328	A4	442	act181row.jpg	2+			NMM				ROW-v	Accept++	ROW
+1923495	1924623	1128	A4	443	act233sunbathe.jpg	1			NMM				SUNBATHE-v	Accept++	SUNBATHE
+1926139	1927510	1371	A4	444	act050crawl.jpg	2-							CRAWL-v	Accept++	CRAWL
+1929049	1930335	1286	A4	445	act003paint.jpg	2-							PAINT-v	Accept++	PAINTBRUSH
+1933303	1934418	1115	A4	446	act045conduct.jpg	1							Don't Know	Reject	DONT KNOW
+1935970	1937170	1200	A4	447	act001dive.jpg	2-			NMM				DIVE-v	Accept++	DIVE_1
+1940121	1941407	1286	A4	448	act126lick.jpg	2+			NMM				LICK-ENVELOPE-v	Accept+	LICK_ENVELOPE.1
+1944888	1945888	1000	A4	449	act254wade.jpg	1							Don't know	Reject	DONT KNOW
+1947584	1948699	1115	A4	450	act033catch.jpg	2-			NMM			He stated: Ball+Catch. 	CATCH_BASEBALL-v	Accept++	CATCH_BASEBALL
+1950720	1951849	1129	A4	451	act091fold.jpg	2+			NMM: 'fold'			Not sure. He seem sign close book. Check it.	FOLD-v	Accept++	FOLD.1
+1954180	1955423	1243	A4	452	act011win.jpg	2+			NMM				AWARD-v	Accept++	AWARD
+1957483	1959083	1600	A4	453	act269wish.jpg	2-							IDEA, ENVISION-v	Reject	IDEA, ENVISION
+1961023	1962223	1200	A4	454	act099golf.jpg	2+			NMM				GOLF-v	Accept++	GOLF
+1964908	1965965	1057	A4	455	act077stretch.jpg	2-						His facial expression shows unsure.	DANCE_v	Reject	DANCE
+1968744	1969944	1200	A4	456	act231strain.jpg	1							WATER, run-CL	Reject	WATER, run-CL
+1972654	1973954	1300	A4	457	act273yawn.jpg	2-			NMM				STRETCH-v	Accept++	STRETCH
+1975514	1976685	1171	A4	458	act038clap.jpg	2-							CLAP-v	Accept++	CLAP
+1977924	1978924	1000	A4	459	act130listen.jpg	1							LISTEN-v	Accept++	LISTEN
+1980653	1981853	1200	A4	460	act134magnify.jpg	1							MAGNIFY-v	Accept++	MAGNIFY
+1984694	1985679	985	A4	461	act020bow.jpg	1							Don't know	Reject	DONT KNOW
+1989226	1990540	1314	A4	462	act062drip.jpg	2+						Check it. 	SCIENCE, EXPERIMENT	Reject	SCIENCE, EXPERIMENT
+1993164	1994379	1215	A4	463	act255wag.jpg	2+						Unclear. Gesture.	?	Reject	?
+1996941	1997969	1028	A4	464	act219spill.jpg	1			NMM				SPILL-v	Accept+-	POUR
+2000695	2002023	1328	A4	465	act115ride.jpg	2-							RIDE-v	Accept+-	RIDE
+2005042	2006427	1385	A4	466	act194wash.jpg	2+			NMM				WASH_HAIR-v	Accept++	SHAMPOO
+2008344	2009573	1229	A4	467	act093scare.jpg	2+			NMM		different from SCARED in ASLLEX because initial HS is different		SCARE-v	Accept++	FRIGHTEN
+2011241	2012255	1014	A4	468	act230stir.jpg	2-			NMM				STIR-v	Accept++	STIR
+2013960	2015389	1429	A4	469	act211smell.jpg	1			NMM			Verb+Noun	SMELL, FLOWER	Reject	SMELL, FLOWER
+2017755	2018940	1185	A4	470	act148oil.jpg	1							Don't know	Reject	DONT KNOW
+2020686	2022001	1315	A4	471	act237sweat.jpg	2+			NMM				SWEAT-v	Accept++	SWEAT
+2023739	2024968	1229	A4	472	act052cry.jpg	1			NMM				CRY-v	Accept++	CRY.1
+2026433	2027833	1400	A4	473	act104hammer.jpg	2-			NMM				HAMMER-v	Accept++	HAMMER
+2029499	2030642	1143	A4	474	act165pray.jpg	2+			NMM				PRAY-v	Accept++	PRAYER
+2034654	2035883	1229	A4	475	act079scared.jpg	1							Don't know	Reject	DONT KNOW
+2038076	2039176	1100	A4	476	eating2.png	1			NMM				EAT-v	Accept++	EAT_1
+2041323	2042709	1386	A4	477	act260water.jpg	1			NMM			Noun+verb	WATER, POUR	Reject	WATER, POUR
+2045013	2046156	1143	A4	478	act141meditate.jpg	2+						Use 8-handshape. 	MEDITATE-v	Accept++	MEDITATE
+2048651	2049808	1157	A4	479	act220sew.jpg	2-			NMM				SEW_v	Accept++	SEW
+2052754	2054325	1571	A4	480	act195sharpen.jpg	2-			NMM			Noun+Verb	KNIFE, SHARP	Reject	KNIFE, SHARP
+2056935	2058063	1128	A4	481	act121knight.jpg	1							Don't know	Reject	DONT KNOW
+2060196	2061639	1443	A4	482	act265whistle.jpg	1			NMM				MUSIC-v	Reject	MUSIC
+2063429	2064686	1257	A4	483	act163pop.jpg	1							POP-v	Accept++	POP
+2066096	2067410	1314	A4	484	act080fall.jpg	2-			NMM				FALL-v	Accept++	FALL_2
+2069777	2071334	1557	A4	485	act082fence.jpg	1			NMM				FENCE-v	Accept++	FENCING
+2073508	2074723	1215	A4	486	act102cook.jpg	1						Unclear	?	Reject	?
+2078083	2079126	1043	A4	487	act128lift.jpg	1							Don't know	Reject	DONT KNOW
+2081487	2082916	1429	A4	488	act152bite.jpg	2-			NMM				STING-v	Accept++	STING
+2084425	2085425	1000	A4	489	act267wink.jpg	1			NMM				WINK-v	Accept++	WINK
+2086893	2088079	1186	A4	490	act213smoke.jpg	1			NMM				SMOKE-v	Accept++	SMOKING
+2090196	2091353	1157	A4	491	act161point.jpg	1			NMM				POINT-v	Accept++	point_index
+2093157	2094243	1086	A4	492	act084file.jpg	2-			NMM				FILE-v	Accept++	FILE_2
+2096140	2097197	1057	A4	493	act143milk.jpg	2+			NMM				MILK-v	Accept++	MILK.1
+2098679	2099879	1200	A4	494	act027bury.jpg	2-							BURY-v	Accept++	BURY.1
+2101375	2102418	1043	A4	495	act173read.jpg	2-			NMM				READ-v	Accept++	READ
+2103949	2104978	1029	A4	496	act259watch.jpg	1			NMM				WATCH-v	Accept++	WATCH
+2107743	2108785	1042	A4	497	act054curtsey.jpg	1							Don't know	Reject	
+2110246	2111289	1043	A4	498	act243tear.jpg	2+			NMM				TEAR_RIP-v	Accept++	TEAR_RIP
+2112592	2114034	1442	A4	499	act168push.jpg	2+			NMM				PUSH, CAR	Reject	PUSH, CAR
+2115750	2117007	1257	A4	500	act018boil.jpg	2+			NMM				BOIL-v	Accept++	BOIL
+2120162	2121190	1028	A4	501	act146mix.jpg	1							Don't know	Reject	
+2124430	2125830	1400	A4	502	act251trip.jpg	2-						He stated double verb. Check it.	PUSH, FALL	Reject	PUSH, FALL
+2127427	2128784	1357	A4	503	act162polish.jpg	2-			NMM				POLISH-V	Accept++	POLISH.1
+2130644	2132158	1514	A4	504	act040cut.jpg	2-						Not sure. He stated cut+something, but he don't specific what is it. Check it.	TRIM-v	Accept++	TRIM.1
+2133812	2135083	1271	A4	505	act212smile.jpg	2+			NMM			Use 1-handshape.	SMILE-v	Accept++	SMILE
+2138186	2139214	1028	A4	506	act107hatch.jpg	1							Don't know	Reject	
+2140712	2141998	1286	A4	507	act010wakeup.jpg	2+							WAKE_UP-v	Accept++	AWAKE
+2144223	2145408	1185	A4	508	act005cut.jpg	2-							CUT-v	Accept++	CUT_2
+2146697	2147868	1171	A4	509	act002drink.jpg	1							DRINK-v	Accept++	DRINK
+2149291	2150677	1386	A4	510	act171rake.jpg	2-			NMM				RAKE-v	Accept++	RAKE
+2152778	2154078	1300	A4	511	act073dump.jpg	2+							DUMP-v	Accept++	EMPTY_2
+2155768	2156939	1171	A4	512	act244talk.jpg	1			NMM: 'call'				CALL-v	Accept++	CALL
+2159106	2160278	1172	A4	513	act076look.jpg	2+							MICROSCOPE-v	Accept++	MICROSCOPE
+2164100	2165143	1043	A4	514	act192sew.jpg	1							Don't know	Reject	
+2166832	2168018	1186	A4	515	act119kiss.jpg	1							KISS_ON_CHEEK-v	Accept++	KISS_ON_CHEEK
+2169450	2170535	1085	A4	516	act023break.jpg	2+							BREAK-v	Accept++	BREAK_1
+2172418	2173733	1315	A4	517	act172reach.jpg	1			NMM				REACH-v	Accept++	REACH
+2175656	2177071	1415	A4	518	act124lasso.jpg	1							LASSO-v	Accept++	LASSO
+2178675	2180018	1343	A4	519	act182run.jpg	2+			NMM				RUN-v	Accept++	RUN
+2181786	2182943	1157	A4	520	act256wait.jpg	2+							WAIT-v	Accept++	WAIT
+2184661	2185761	1100	A4	521	act055dance.jpg	2-							DANCE-v	Accept++	DANCE
+2187148	2188419	1271	A4	522	act039climb.jpg	2+			NMM				CLIMB-v	Accept++	CLIMB
+2189880	2191037	1157	A4	523	jump2.png	2-			NMM		lazy sign		JUMP-v	Accept++	JUMP
+2192426	2193697	1271	A4	524	act047cough.jpg	1			NMM				COUGH-v	Accept++	COUGH
+2195444	2196816	1372	A4	525	act187scoop.jpg	2-							SCOOP-v	Accept++	SCOOP
+2198471	2199543	1072	A4	526	act132unlock.jpg	2+			NMM: 'open'				OPEN-v	Accept+-	OPEN
+2203392	2204435	1043	A4	527	act136make.jpg	1							Don't know	Reject	
+2205926	2207140	1214	A4	528	act226stack.jpg	2-							STACK-v	Accept++	STACK
+2209594	2210276	682		529	act051cross.jpg								WALK-v	Accept++	WALK_2
+44310	45545	1235	O3												COW
+47047	48148	1101	O3												FOX
