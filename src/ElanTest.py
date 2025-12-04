@@ -33,6 +33,11 @@ df_elan["ID Gloss ASLLEX"] = df_elan["ID Gloss ASLLEX"].str.strip().str.lower()
 #Create new cololmn ID Gloss ASLEX OLD that is a copy of ID Gloss ASLLEX
 df_elan["ID Gloss ASLLEX OLD"] = df_elan["ID Gloss ASLLEX"]
 
+
+##IF str.split(".").str[1] >1 change the period to underscore then run 
+
+
+
 #Truncate ID Gloss ASLLEX at the first period
 df_elan["ID Gloss ASLLEX"] = df_elan["ID Gloss ASLLEX"].str.split(".").str[0]
 
@@ -56,12 +61,13 @@ print("\nTrials that had a Rejected response Status -> Discard")
 print(bad)
 
 
-
+#ORder Underscore check multiple underscores then remove numbers then take out -ca add _1
 
 ##Dropping the first few rows with NA's and last rows that are empty
 entryIDs = set(ALex_df['EntryID'].dropna()) 
 
 def func(row):
+    
     val = row['ID Gloss ASLLEX']
     base = str(val).strip().lower()
 
@@ -92,8 +98,8 @@ def func(row):
         else:
             return fixed, False   # exists in dict but not in ASL-LEX
 
-    # 2. replace periods with underscores
-    gloss = base.replace('.', '_')
+    # # 2. replace periods with underscores
+    # gloss = base.replace('.', '_')
     if gloss in entryIDs: 
         return gloss, True
     
@@ -124,7 +130,7 @@ good.to_csv(dir_path / "PreMerged-PostMod--Elan.csv", index = False)
 
 #Merge
 df_joined = good.merge(ALex_df, how='left', left_on="CleanGloss",right_on="EntryID")
-df_joined = df_joined[df_joined["Matched"] == True]
+# df_joined = df_joined[df_joined["Matched"] == True]
 
 
 
@@ -192,26 +198,26 @@ def plot_duration_nouns_verbs(df_joined):
     # one big figure with 4 panels
     fig, axes = plt.subplots(2, 2, figsize=(11, 8))
 
-     # 1) box: nouns vs verbs
+     # 1 nouns vs verbs
     sns.boxplot(data=df,x="LexicalClass", y="duration_msec",order=class_order,ax=axes[0, 0])
     axes[0, 0].set_title("Duration by Class (box)")
     axes[0, 0].set_xlabel("Lexical Class")
     axes[0, 0].set_ylabel("Duration (msec)")
 
-    # 2) violin: nouns vs verbs
+    # 2 nouns vs verbs
     sns.violinplot( data=df, x="LexicalClass", y="duration_msec", order=class_order, cut=0,ax=axes[0, 1])
     axes[0, 1].set_title("Duration by Class (violin)")
     axes[0, 1].set_xlabel("Lexical Class")
     axes[0, 1].set_ylabel("Duration (msec)")
 
-    # 3) box: class x high/low frequency
+    # 3 class x high/low frequency
     sns.boxplot( data=df, x="LexicalClass", y="duration_msec", hue="freq_group", order=class_order, hue_order=freq_order, ax=axes[1, 0])
     axes[1, 0].set_title("Duration by Class + Freq (box)")
     axes[1, 0].set_xlabel("Lexical Class")
     axes[1, 0].set_ylabel("Duration (msec)")
     axes[1, 0].legend(title="Freq", loc="best")
 
-    # 4) violin: class x high/low frequency
+    # 4: class x high/low frequency
     sns.violinplot( data=df, x="LexicalClass", y="duration_msec", hue="freq_group", order=class_order, hue_order=freq_order, cut=0, split=True, ax=axes[1, 1])
     axes[1, 1].set_title("Duration by Class + Freq (violin)")
     axes[1, 1].set_xlabel("Lexical Class")
